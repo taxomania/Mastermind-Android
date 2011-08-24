@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="match_parent"
-	android:layout_height="match_parent" android:id="@+id/mainLayout"
-	android:paddingLeft="10px" android:paddingRight="10px"
-	android:background="@drawable/menu">
-	<Button android:text="New Game" android:id="@+id/newGame"
-		android:onClick="onNewGameClick" android:layout_above="@+id/tab"
-		android:layout_width="match_parent" android:layout_height="wrap_content"></Button>
-	<TableLayout android:stretchColumns="0,1"
-		android:layout_width="match_parent" android:layout_height="wrap_content"
-		android:id="@+id/tab" android:layout_alignParentBottom="true">
-		<TableRow>
-			<Button android:text="Instructions" android:id="@+id/instructions"
-				android:onClick="onInstructionsClick"
-				android:layout_width="match_parent" android:layout_height="wrap_content"></Button>
-			<Button android:text="High Scores" android:id="@+id/highscores"
-				android:onClick="onScoresClick"
-				android:layout_width="match_parent" android:layout_height="wrap_content"></Button>
-		</TableRow>
-		<TableRow android:weightSum="1">
-			<Button android:text="Mastermind Pro" android:id="@+id/pro"
-				android:layout_weight="0" android:onClick="onProClick"
-				android:layout_above="@+id/quit" android:layout_width="match_parent"
-				android:layout_height="wrap_content"></Button>
-			<Button android:text="Quit" android:id="@+id/quit"
-				android:layout_weight="1" android:onClick="onQuitClick"
-				android:layout_column="1" android:layout_width="match_parent"
-				android:layout_height="wrap_content"></Button>
-		</TableRow>
-	</TableLayout>
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="fill_parent" android:id="@+id/mainLayout"
+    android:paddingLeft="10dp" android:paddingRight="10dp"
+    android:background="@drawable/menu">
+    <Button android:text="New Game" android:id="@+id/newGame"
+        android:onClick="onNewGameClick" android:layout_above="@+id/tab"
+        android:layout_width="fill_parent" android:layout_height="wrap_content"></Button>
+    <TableLayout android:stretchColumns="0,1"
+        android:layout_width="fill_parent" android:layout_height="wrap_content"
+        android:id="@+id/tab" android:layout_alignParentBottom="true">
+        <TableRow>
+            <Button android:text="Instructions" android:id="@+id/instructions"
+                android:onClick="onInstructionsClick"
+                android:layout_width="fill_parent" android:layout_height="wrap_content"></Button>
+            <Button android:text="High Scores" android:id="@+id/highscores"
+                android:onClick="onScoresClick"
+                android:layout_width="fill_parent" android:layout_height="wrap_content"></Button>
+        </TableRow>
+        <TableRow android:weightSum="1">
+            <Button android:text="Mastermind Pro" android:id="@+id/pro"
+                android:layout_weight="0" android:onClick="onProClick"
+                android:layout_above="@+id/quit" android:layout_width="fill_parent"
+                android:layout_height="wrap_content"></Button>
+            <Button android:text="Quit" android:id="@+id/quit"
+                android:layout_weight="1" android:onClick="onQuitClick"
+                android:layout_column="1" android:layout_width="fill_parent"
+                android:layout_height="wrap_content"></Button>
+        </TableRow>
+    </TableLayout>
 </RelativeLayout>
