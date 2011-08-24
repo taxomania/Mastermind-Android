@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:background="@drawable/bg" android:layout_width="match_parent"
+	android:layout_height="match_parent" android:padding="5px">
+	<TableLayout android:id="@+id/chooseBoard"
+		android:stretchColumns="0,1" android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+		<TableRow>
+			<TextView android:text="High Scores" android:textColor="@color/white" android:textStyle="bold"
+				android:textSize="24px" android:padding="20px" android:layout_gravity="center" />
+		</TableRow>
+
+		<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_gravity="center"
+			android:layout_width="fill_parent" android:layout_height="fill_parent">
+			<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:id="@+id/highScoreTable" android:layout_width="fill_parent"
+				android:layout_height="fill_parent" android:stretchColumns="0,1,2,3">
+			</TableLayout>
+
+		</ScrollView>
+	</TableLayout>
+</LinearLayout>
+

@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent" android:layout_height="match_parent"
+	android:id="@+id/mastermindLayout" android:background="@drawable/bg">
+	<ScrollView android:layout_marginTop="25dp" android:layout_above="@+id/purplePeg" android:layout_height="fill_parent" android:layout_width="match_parent">
+		<TableLayout android:layout_gravity="center_vertical"
+			android:layout_height="fill_parent" android:layout_width="match_parent">
+
+			<!-- guess 10 -->
+			<TableRow>
+				<RelativeLayout>
+					<ImageView android:id="@+id/smallPeg1"
+						android:layout_marginLeft="20dp" android:layout_height="wrap_content"
+						android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg2"
+						android:layout_toRightOf="@+id/smallPeg1" android:layout_height="wrap_content"
+						android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg3"
+						android:layout_marginLeft="20dp" android:layout_below="@+id/smallPeg1"
+						android:layout_height="wrap_content" android:layout_width="wrap_content"
+						android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg4"
+						android:layout_below="@+id/smallPeg2" android:layout_toRightOf="@+id/smallPeg3"
+						android:layout_height="wrap_content" android:layout_width="wrap_content"
+						android:background="@drawable/smallslot"></ImageView>
+
+					<ImageView android:id="@+id/peg01" android:layout_height="wrap_content"
+						android:onClick="select" android:layout_toRightOf="@+id/smallPeg2"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg02"
+						android:layout_toRightOf="@+id/peg01" android:onClick="select"
+						android:layout_height="wrap_content" android:background="@drawable/pegslot"
+						android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg03"
+						android:layout_toRightOf="@+id/peg02" android:onClick="select"
+						android:layout_height="wrap_content" android:background="@drawable/pegslot"
+						android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg04" android:layout_height="wrap_content"
+						android:onClick="select" android:layout_toRightOf="@+id/peg03"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+
+					<ImageView android:id="@+id/confirm01"
+						android:layout_height="wrap_content" android:onClick="confirm"
+						android:layout_toRightOf="@+id/peg04" android:layout_width="wrap_content"></ImageView>
+				</RelativeLayout>
+			</TableRow>
+
+			<!-- guess 9 -->
+			<TableRow>
+				<RelativeLayout>
+					<ImageView android:id="@+id/smallPeg5"
+						android:layout_marginLeft="20dp" android:layout_height="wrap_content"
+						android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg6"
+						android:layout_toRightOf="@+id/smallPeg5" android:layout_height="wrap_content"
+						android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg7"
+						android:layout_marginLeft="20dp" android:layout_below="@+id/smallPeg5"
+						android:layout_height="wrap_content" android:layout_width="wrap_content"
+						android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg8"
+						android:layout_below="@+id/smallPeg6" android:layout_toRightOf="@+id/smallPeg7"
+						android:layout_height="wrap_content" android:layout_width="wrap_content"
+						android:background="@drawable/smallslot"></ImageView>
+
+					<ImageView android:id="@+id/peg05" android:layout_height="wrap_content"
+						android:onClick="select" android:layout_toRightOf="@+id/smallPeg6"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg06"
+						android:layout_toRightOf="@+id/peg05" android:onClick="select"
+						android:layout_height="wrap_content" android:background="@drawable/pegslot"
+						android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg07"
+						android:layout_toRightOf="@+id/peg06" android:onClick="select"
+						android:layout_height="wrap_content" android:background="@drawable/pegslot"
+						android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg08" android:layout_height="wrap_content"
+						android:onClick="select" android:layout_toRightOf="@+id/peg07"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/confirm02"
+						android:layout_height="wrap_content" android:onClick="confirm"
+						android:layout_toRightOf="@+id/peg08" android:layout_width="wrap_content"></ImageView>
+				</RelativeLayout>
+			</TableRow>
+
+			<!-- guess 8 -->
+			<TableRow>
+				<RelativeLayout>
+					<ImageView android:id="@+id/smallPeg9"
+						android:layout_marginLeft="20dp" android:layout_height="wrap_content"
+						android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg10"
+						android:layout_toRightOf="@+id/smallPeg9" android:layout_height="wrap_content"
+						android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg11"
+						android:layout_marginLeft="20dp" android:layout_below="@+id/smallPeg9"
+						android:layout_height="wrap_content" android:layout_width="wrap_content"
+						android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg12"
+						android:layout_below="@+id/smallPeg10" android:layout_toRightOf="@+id/smallPeg11"
+						android:layout_height="wrap_content" android:layout_width="wrap_content"
+						android:background="@drawable/smallslot"></ImageView>
+
+					<ImageView android:id="@+id/peg09" android:layout_height="wrap_content"
+						android:onClick="select" android:layout_toRightOf="@+id/smallPeg10"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg10" android:onClick="select"
+						android:layout_toRightOf="@+id/peg09" android:layout_height="wrap_content"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg11" android:onClick="select"
+						android:layout_toRightOf="@+id/peg10" android:layout_height="wrap_content"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg12" android:layout_height="wrap_content"
+						android:onClick="select" android:layout_toRightOf="@+id/peg11"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/confirm03"
+						android:layout_height="wrap_content" android:onClick="confirm"
+						android:layout_toRightOf="@+id/peg12" android:layout_width="wrap_content"></ImageView>
+				</RelativeLayout>
+			</TableRow>
+
+			<!-- guess 7 -->
+			<TableRow>
+				<RelativeLayout>
+					<ImageView android:id="@+id/smallPeg13"
+						android:layout_marginLeft="20dp" android:layout_height="wrap_content"
+						android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg14"
+						android:layout_toRightOf="@+id/smallPeg13" android:layout_height="wrap_content"
+						android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg15"
+						android:layout_marginLeft="20dp" android:layout_below="@+id/smallPeg13"
+						android:layout_height="wrap_content" android:layout_width="wrap_content"
+						android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg16"
+						android:layout_below="@+id/smallPeg14" android:layout_toRightOf="@+id/smallPeg15"
+						android:layout_height="wrap_content" android:layout_width="wrap_content"
+						android:background="@drawable/smallslot"></ImageView>
+
+					<ImageView android:id="@+id/peg13" android:layout_height="wrap_content"
+						android:onClick="select" android:layout_toRightOf="@+id/smallPeg14"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg14" android:onClick="select"
+						android:layout_toRightOf="@+id/peg13" android:layout_height="wrap_content"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg15" android:onClick="select"
+						android:layout_toRightOf="@+id/peg14" android:layout_height="wrap_content"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg16" android:layout_height="wrap_content"
+						android:onClick="select" android:layout_toRightOf="@+id/peg15"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+
+					<ImageView android:id="@+id/confirm04"
+						android:layout_height="wrap_content" android:onClick="confirm"
+						android:layout_toRightOf="@+id/peg16" android:layout_width="wrap_content"></ImageView>
+				</RelativeLayout>
+			</TableRow>
+
+			<!-- guess 6 -->
+			<TableRow>
+				<RelativeLayout>
+					<ImageView android:id="@+id/smallPeg17"
+						android:layout_marginLeft="20dp" android:layout_height="wrap_content"
+						android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg18"
+						android:layout_toRightOf="@+id/smallPeg17" android:layout_height="wrap_content"
+						android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg19"
+						android:layout_marginLeft="20dp" android:layout_below="@+id/smallPeg17"
+						android:layout_height="wrap_content" android:layout_width="wrap_content"
+						android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg20"
+						android:layout_below="@+id/smallPeg18" android:layout_toRightOf="@+id/smallPeg19"
+						android:layout_height="wrap_content" android:layout_width="wrap_content"
+						android:background="@drawable/smallslot"></ImageView>
+
+					<ImageView android:id="@+id/peg17" android:layout_height="wrap_content"
+						android:onClick="select" android:layout_toRightOf="@+id/smallPeg18"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg18" android:onClick="select"
+						android:layout_toRightOf="@+id/peg17" android:layout_height="wrap_content"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg19" android:onClick="select"
+						android:layout_toRightOf="@+id/peg18" android:layout_height="wrap_content"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg20" android:layout_height="wrap_content"
+						android:onClick="select" android:layout_toRightOf="@+id/peg19"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/confirm05"
+						android:layout_height="wrap_content" android:onClick="confirm"
+						android:layout_toRightOf="@+id/peg20" android:layout_width="wrap_content"></ImageView>
+
+				</RelativeLayout>
+			</TableRow>
+
+			<!-- guess 5 -->
+			<TableRow>
+				<RelativeLayout>
+					<ImageView android:id="@+id/smallPeg21"
+						android:layout_marginLeft="20dp" android:layout_height="wrap_content"
+						android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg22"
+						android:layout_toRightOf="@+id/smallPeg21" android:layout_height="wrap_content"
+						android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg23"
+						android:layout_marginLeft="20dp" android:layout_below="@+id/smallPeg21"
+						android:layout_height="wrap_content" android:layout_width="wrap_content"
+						android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg24"
+						android:layout_below="@+id/smallPeg22" android:layout_toRightOf="@+id/smallPeg23"
+						android:layout_height="wrap_content" android:layout_width="wrap_content"
+						android:background="@drawable/smallslot"></ImageView>
+
+					<ImageView android:id="@+id/peg21" android:layout_height="wrap_content"
+						android:onClick="select" android:layout_toRightOf="@+id/smallPeg22"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg22" android:onClick="select"
+						android:layout_toRightOf="@+id/peg21" android:layout_height="wrap_content"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg23" android:onClick="select"
+						android:layout_toRightOf="@+id/peg22" android:layout_height="wrap_content"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg24" android:layout_height="wrap_content"
+						android:onClick="select" android:layout_toRightOf="@+id/peg23"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+
+					<ImageView android:id="@+id/confirm06"
+						android:layout_height="wrap_content" android:onClick="confirm"
+						android:layout_toRightOf="@+id/peg24" android:layout_width="wrap_content"></ImageView>
+				</RelativeLayout>
+			</TableRow>
+
+			<!-- guess 4 -->
+			<TableRow>
+				<RelativeLayout>
+					<ImageView android:id="@+id/smallPeg25"
+						android:layout_marginLeft="20dp" android:layout_height="wrap_content"
+						android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg26"
+						android:layout_toRightOf="@+id/smallPeg25" android:layout_height="wrap_content"
+						android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg27"
+						android:layout_marginLeft="20dp" android:layout_below="@+id/smallPeg26"
+						android:layout_height="wrap_content" android:layout_width="wrap_content"
+						android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg28"
+						android:layout_below="@+id/smallPeg26" android:layout_toRightOf="@+id/smallPeg27"
+						android:layout_height="wrap_content" android:layout_width="wrap_content"
+						android:background="@drawable/smallslot"></ImageView>
+
+					<ImageView android:id="@+id/peg25" android:layout_height="wrap_content"
+						android:onClick="select" android:layout_toRightOf="@+id/smallPeg26"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg26" android:onClick="select"
+						android:layout_toRightOf="@+id/peg25" android:layout_height="wrap_content"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg27" android:onClick="select"
+						android:layout_toRightOf="@+id/peg26" android:layout_height="wrap_content"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg28" android:layout_height="wrap_content"
+						android:onClick="select" android:layout_toRightOf="@+id/peg27"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+
+					<ImageView android:id="@+id/confirm07"
+						android:layout_height="wrap_content" android:onClick="confirm"
+						android:layout_toRightOf="@+id/peg28" android:layout_width="wrap_content"></ImageView>
+				</RelativeLayout>
+			</TableRow>
+
+			<!-- guess 3 -->
+			<TableRow>
+				<RelativeLayout>
+					<ImageView android:id="@+id/smallPeg29"
+						android:layout_marginLeft="20dp" android:layout_height="wrap_content"
+						android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg30"
+						android:layout_toRightOf="@+id/smallPeg29" android:layout_height="wrap_content"
+						android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg31"
+						android:layout_marginLeft="20dp" android:layout_below="@+id/smallPeg29"
+						android:layout_height="wrap_content" android:layout_width="wrap_content"
+						android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg32"
+						android:layout_below="@+id/smallPeg30" android:layout_toRightOf="@+id/smallPeg31"
+						android:layout_height="wrap_content" android:layout_width="wrap_content"
+						android:background="@drawable/smallslot"></ImageView>
+
+					<ImageView android:id="@+id/peg29" android:layout_height="wrap_content"
+						android:onClick="select" android:layout_toRightOf="@+id/smallPeg30"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg30" android:onClick="select"
+						android:layout_toRightOf="@+id/peg29" android:layout_height="wrap_content"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg31" android:onClick="select"
+						android:layout_toRightOf="@+id/peg30" android:layout_height="wrap_content"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg32" android:layout_height="wrap_content"
+						android:onClick="select" android:layout_toRightOf="@+id/peg31"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/confirm08"
+						android:layout_height="wrap_content" android:onClick="confirm"
+						android:layout_toRightOf="@+id/peg32" android:layout_width="wrap_content"></ImageView>
+
+				</RelativeLayout>
+			</TableRow>
+
+			<!-- guess 2 -->
+			<TableRow>
+				<RelativeLayout>
+					<ImageView android:id="@+id/smallPeg33"
+						android:layout_marginLeft="20dp" android:layout_height="wrap_content"
+						android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg34"
+						android:layout_toRightOf="@+id/smallPeg33" android:layout_height="wrap_content"
+						android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg35"
+						android:layout_marginLeft="20dp" android:layout_below="@+id/smallPeg33"
+						android:layout_height="wrap_content" android:layout_width="wrap_content"
+						android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg36"
+						android:layout_below="@+id/smallPeg34" android:layout_toRightOf="@+id/smallPeg35"
+						android:layout_height="wrap_content" android:layout_width="wrap_content"
+						android:background="@drawable/smallslot"></ImageView>
+
+					<ImageView android:id="@+id/peg33" android:layout_height="wrap_content"
+						android:onClick="select" android:layout_toRightOf="@+id/smallPeg34"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg34" android:onClick="select"
+						android:layout_toRightOf="@+id/peg33" android:layout_height="wrap_content"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg35" android:onClick="select"
+						android:layout_toRightOf="@+id/peg34" android:layout_height="wrap_content"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg36" android:layout_height="wrap_content"
+						android:onClick="select" android:layout_toRightOf="@+id/peg35"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+
+					<ImageView android:id="@+id/confirm09"
+						android:layout_height="wrap_content" android:onClick="confirm"
+						android:layout_toRightOf="@+id/peg36" android:layout_width="wrap_content"></ImageView>
+				</RelativeLayout>
+			</TableRow>
+
+			<!-- guess 1 -->
+			<TableRow>
+				<RelativeLayout>
+					<ImageView android:id="@+id/smallPeg37"
+						android:layout_marginLeft="20dp" android:layout_height="wrap_content"
+						android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg38"
+						android:layout_toRightOf="@+id/smallPeg37" android:layout_height="wrap_content"
+						android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg39"
+						android:layout_marginLeft="20dp" android:layout_below="@+id/smallPeg37"
+						android:layout_height="wrap_content" android:layout_width="wrap_content"
+						android:background="@drawable/smallslot"></ImageView>
+					<ImageView android:id="@+id/smallPeg40"
+						android:layout_below="@+id/smallPeg38" android:layout_toRightOf="@+id/smallPeg39"
+						android:layout_height="wrap_content" android:layout_width="wrap_content"
+						android:background="@drawable/smallslot"></ImageView>
+
+					<ImageView android:id="@+id/peg37" android:layout_height="wrap_content"
+						android:onClick="select" android:layout_toRightOf="@+id/smallPeg38"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg38" android:onClick="select"
+						android:layout_toRightOf="@+id/peg37" android:layout_height="wrap_content"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg39" android:onClick="select"
+						android:layout_toRightOf="@+id/peg38" android:layout_height="wrap_content"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+					<ImageView android:id="@+id/peg40" android:layout_height="wrap_content"
+						android:onClick="select" android:layout_toRightOf="@+id/peg39"
+						android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+
+					<ImageView android:id="@+id/confirm10"
+						android:layout_height="wrap_content" android:onClick="confirm"
+						android:src="@drawable/row" android:layout_toRightOf="@+id/peg40"
+						android:layout_width="wrap_content"></ImageView>
+				</RelativeLayout>
+			</TableRow>
+		</TableLayout>
+	</ScrollView>
+	<!-- selection of pegs -->
+	<ImageView android:src="@drawable/bluepeg" android:id="@+id/bluePeg"
+		android:onClick="onBlue" android:layout_height="wrap_content"
+		android:layout_width="wrap_content" android:layout_alignParentBottom="true"></ImageView>
+	<ImageView android:src="@drawable/greenpeg" android:id="@+id/greenPeg"
+		android:onClick="onGreen" android:layout_height="wrap_content"
+		android:layout_width="wrap_content" android:layout_alignParentBottom="true"
+		android:layout_toRightOf="@+id/bluePeg"></ImageView>
+	<ImageView android:src="@drawable/redpeg" android:id="@+id/redPeg"
+		android:onClick="onRed" android:layout_height="wrap_content"
+		android:layout_width="wrap_content" android:layout_alignParentBottom="true"
+		android:layout_toRightOf="@+id/greenPeg"></ImageView>
+	<ImageView android:src="@drawable/whitepeg" android:id="@+id/whitePeg"
+		android:onClick="onWhite" android:layout_height="wrap_content"
+		android:layout_width="wrap_content" android:layout_toRightOf="@+id/redPeg"
+		android:layout_alignParentBottom="true"></ImageView>
+	<ImageView android:src="@drawable/yellowpeg" android:id="@+id/yellowPeg"
+		android:layout_toRightOf="@+id/whitePeg" android:layout_height="wrap_content"
+		android:layout_width="wrap_content" android:onClick="onYellow"
+		android:layout_alignParentBottom="true"></ImageView>
+	<ImageView android:src="@drawable/purplepeg" android:id="@+id/purplePeg"
+		android:layout_toRightOf="@+id/yellowPeg" android:layout_height="wrap_content"
+		android:layout_width="wrap_content" android:onClick="onPurple"
+		android:layout_alignParentBottom="true"></ImageView>
+	<Chronometer android:layout_height="wrap_content" android:id="@+id/timer"
+		android:layout_width="wrap_content" android:text="" android:padding="5dp"
+		android:visibility="invisible" android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"></Chronometer>
+
+</RelativeLayout>
