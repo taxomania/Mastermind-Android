@@ -6,11 +6,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Chronometer;
+import android.widget.Toast;
 import android.widget.Chronometer.OnChronometerTickListener;
 import android.widget.EditText;
 
@@ -80,34 +82,58 @@ public class TimedMastermind extends Mastermind {
         timer.start();
     }
 
-    private void setLocal(){
-        final DataHelper dh = DataHelper.getInstance(this);
-        if (dh.getCount() < 3)
-            enterName();
-        else{
-            final List<Integer> list = dh.selectAllTimes();
-            int last = list.get(list.size()-1);
-            if (time < last)
-                enterName();
-        }
-    }
 
-    private EditText userName;
-    private static String username;
+    private final class CheckIfHighScore extends AsyncTask<Integer,  Void, Boolean>{
+        @Override
+        protected Boolean doInBackground(Integer... time)
+        {
+            final DataHelper dh = DataHelper.getInstance(TimedMastermind.this);
+            if (dh.getCount() < 7) return true;
+            final List<Integer> list = dh.selectAllTimes();
+            final int last = list.get(list.size()-1);
+            if (time[0] < last) return true;
+            return false;
+        } // doInBackground
+
+        @Override
+        protected void onPostExecute(Boolean newScore)
+        {
+            if (newScore) enterName();
+        } // onPostExecute
+    } // CheckIfHighScore
+
+    private final class AddLocalScore extends AsyncTask<Object, Void, Long> {
+
+        @Override
+        protected Long doInBackground(Object... params) {
+            final DataHelper dh = DataHelper.getInstance(TimedMastermind.this);
+            return dh.insert(params[0].toString(), (Integer) params[1], (Integer) params[2]);
+        } // doInBackground
+
+        @Override
+        protected void onPostExecute(Long result)
+        {
+            if (result == -1)
+            {
+                Toast.makeText(TimedMastermind.this, "There was an error submitting your score",
+                        Toast.LENGTH_SHORT).show();
+            }
+        } // onPostExecute
+
+    } // AddLocalScore
+
     private void enterName()
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("NEW HIGHSCORE!");
-        userName = new EditText(this);
+        final EditText userName = new EditText(this);
         builder.setView(userName).setMessage("Enter Your Name")
                 .setPositiveButton("Done",
                         new DialogInterface.OnClickListener()
                 {
                     public void onClick(DialogInterface dialog, int whichButton)
                     {
-                        username = userName.getText().toString();
-                        final DataHelper dh = DataHelper.getInstance(TimedMastermind.this);
-                        dh.insert(username, time, guess);
+                        new AddLocalScore().execute(userName.getText().toString(), time, guess);
                         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(userName.getWindowToken(), 0);
                     }
@@ -116,10 +142,11 @@ public class TimedMastermind extends Mastermind {
                 {
                     public void onClick(DialogInterface dialog, int whichButton)
                     {
-
+                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(userName.getWindowToken(), 0);
                     }
                 });
-        AlertDialog alert = builder.create();
+        final AlertDialog alert = builder.create();
         alert.show();
     }
 
@@ -135,7 +162,7 @@ public class TimedMastermind extends Mastermind {
         timeScore = mins + ":" + secs;
         showEndAlert();
 
-        setLocal();
+        new CheckIfHighScore().execute(time);
     }
 
     private void showEndAlert() {

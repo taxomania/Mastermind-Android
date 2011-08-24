@@ -53,12 +53,12 @@ public class DataHelper {
         return count().size();
     }
 
-    public void insert(String name, int time, int guesses) {
+    public long insert(String name, int time, int guesses) {
         ContentValues cv = new ContentValues();
         cv.put("name", name);
         cv.put("time", time);
         cv.put("guesses", guesses);
-        mDb.insert(Scores.TABLE_NAME, null, cv);
+        return mDb.insert(Scores.TABLE_NAME, null, cv);
     }
 
     public void deleteAll() {
