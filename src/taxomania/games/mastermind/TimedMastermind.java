@@ -11,6 +11,7 @@ import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +24,7 @@ import android.widget.Toast;
 
 public class TimedMastermind extends Mastermind {
     private Chronometer mTimer;
-    private static boolean sResume = false, sStopped = false;
+    private boolean mResume = false, mStopped = false;
     private int mTime;
     private long mElapsedTime, mMinutes, mSeconds;
     private SensorManager mSensorManager;
@@ -41,7 +42,7 @@ public class TimedMastermind extends Mastermind {
         mTimer.setBase(SystemClock.elapsedRealtime());
         mTimer.setOnChronometerTickListener(new OnChronometerTickListener() {
             public void onChronometerTick(final Chronometer chrono) {
-                if (!sResume) {
+                if (!mResume) {
                     mMinutes = ((SystemClock.elapsedRealtime() - mTimer
                             .getBase()) / 1000) / 60;
                     mSeconds = ((SystemClock.elapsedRealtime() - mTimer
@@ -107,17 +108,17 @@ public class TimedMastermind extends Mastermind {
 
     private void resume(final DialogInterface dialog){
         dialog.dismiss();
-        sResume = true;
+        mResume = true;
         mTimer.start();
     } // resume
 
     @Override
     protected void onResume() {
       super.onResume();
-      if (sStopped)
+      if (mStopped)
       {
           pauseGame();
-          sStopped = false;
+          mStopped = false;
       }
       mSensorManager.registerListener(mSensorListener,
           mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
@@ -127,7 +128,7 @@ public class TimedMastermind extends Mastermind {
     @Override
     protected void onPause() {
         mTimer.stop();
-        sStopped = true;
+        mStopped = true;
         super.onPause();
     } // onPause
 
@@ -135,14 +136,14 @@ public class TimedMastermind extends Mastermind {
     protected void onStop() {
         mSensorManager.unregisterListener(mSensorListener);
         mTimer.stop();
-        sStopped = false;
+        mStopped = false;
         super.onStop();
     } // onStop
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        sResume = true;
+        mResume = true;
         mTimer.start();
     } // onRestart
 
@@ -184,6 +185,7 @@ public class TimedMastermind extends Mastermind {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("NEW HIGHSCORE!");
         final EditText userName = new EditText(this);
+        userName.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(userName).setMessage("Enter Your Name")
                 .setPositiveButton("Done",
                         new DialogInterface.OnClickListener() {
