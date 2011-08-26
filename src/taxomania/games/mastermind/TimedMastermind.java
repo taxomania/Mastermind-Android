@@ -190,7 +190,7 @@ public class TimedMastermind extends Mastermind {
                 .setPositiveButton("Done",
                         new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int whichButton) {
-                        new AddLocalScore().execute(userName.getText().toString(), mTime, guess);
+                        new AddLocalScore().execute(userName.getText().toString(), mTime, sGuess);
                         final InputMethodManager imm =
                                 (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(userName.getWindowToken(), 0);
@@ -227,7 +227,7 @@ public class TimedMastermind extends Mastermind {
         final Intent again = new Intent(this, TimedMastermind.class);
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(
-                "Congratulations! You cracked the code in " + guess
+                "Congratulations! You cracked the code in " + sGuess
                         + " attempts and in time " + timeScore + "!")
                 .setCancelable(false)
                 .setPositiveButton("Start Again",

@@ -8,23 +8,23 @@ package taxomania.games.mastermind;
 public class Engine {
     protected static final int TOTAL_NO_PEGS = 6;
     private static final int COMBO_LENGTH = 4;
-    private final static Pair[] combination = new Pair[COMBO_LENGTH];
+    private final static Pair[] sCombination = new Pair[COMBO_LENGTH];
 
     public Engine(){
-        for (int i = 0; i < combination.length; i++)
-            combination[i] = new Pair(Mastermind.pegs[(int)((TOTAL_NO_PEGS) * Math.random())]);
+        for (int i = 0; i < sCombination.length; i++)
+            sCombination[i] = new Pair(Mastermind.sPegs[(int)((TOTAL_NO_PEGS) * Math.random())]);
     }
 
     public void resetStates(){
-        for (int i=0;i<combination.length;i++)
-            combination[i].setReady(true);
+        for (int i=0;i<sCombination.length;i++)
+            sCombination[i].setReady(true);
     }
 
     // Check the peg is the right colour and in the right position
     public boolean checkPos(int guess, int pos){
-        if (combination[pos].getReady())
-            if (guess == combination[pos].getPeg()){
-                combination[pos].setReady(false);
+        if (sCombination[pos].getReady())
+            if (guess == sCombination[pos].getPeg()){
+                sCombination[pos].setReady(false);
                 return true;
             }
         return false;
@@ -32,10 +32,10 @@ public class Engine {
 
     // Check the peg is the right colour but in the wrong position
     public boolean checkPeg(int guess){
-        for (int i=0; i< combination.length;i++)
-            if (combination[i].getReady())
-                if (guess == combination[i].getPeg()){
-                    combination[i].setReady(false);
+        for (int i=0; i< sCombination.length;i++)
+            if (sCombination[i].getReady())
+                if (guess == sCombination[i].getPeg()){
+                    sCombination[i].setReady(false);
                     return true;
                 }
 
