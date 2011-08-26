@@ -61,31 +61,32 @@ public class Mastermind extends Activity {
         findViewById(R.id.confirm10).setClickable(false);
     }
 
+
+    protected static final int MENU_NEW_GAME = Menu.FIRST;
+    protected static final int MENU_INSTRUCTIONS = Menu.FIRST+1;
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        menu.add(Menu.NONE, MENU_NEW_GAME, MENU_NEW_GAME, "New Game");
+        menu.add(Menu.NONE, MENU_INSTRUCTIONS, MENU_INSTRUCTIONS, "Instructions");
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-        case R.id.newGameMenu:
-            startActivity(new Intent(this, getClass()));
-            finish();
-            return true;
-        case R.id.instructionsMenu:
-            startActivity(new Intent(this, Instructions.class));
-            return true;
-        case R.id.quitGameMenu:
-            finish();
-            return true;
-        default:
-            return super.onOptionsItemSelected(item);
-        }
-    }
+            case MENU_NEW_GAME:
+                startActivity(new Intent(this, getClass()));
+                finish();
+                return true;
+            case MENU_INSTRUCTIONS:
+                startActivity(new Intent(this, Instructions.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        } // switch
+    } // onOptionsItemSelected
 
     @Override
     protected void onStart() {

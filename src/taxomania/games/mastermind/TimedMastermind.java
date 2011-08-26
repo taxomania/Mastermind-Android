@@ -6,37 +6,45 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Chronometer;
-import android.widget.Toast;
 import android.widget.Chronometer.OnChronometerTickListener;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class TimedMastermind extends Mastermind {
-    private Chronometer timer;
-    private boolean resume;
-    private int  time;
+    private Chronometer mTimer;
+    private static boolean sResume = false;
+    private int time;
     private long elapsedTime, minutes, seconds;
+    private SensorManager mSensorManager;
+    private ShakeEventListener mSensorListener;
+    private AlertDialog mPauseAlert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        resume = false;
-        timer = (Chronometer) findViewById(R.id.timer);
-        timer.setVisibility(View.VISIBLE);
-        timer.setBase(SystemClock.elapsedRealtime());
-        timer.setOnChronometerTickListener(new OnChronometerTickListener() {
+
+        createPauseAlert();
+
+        mTimer = (Chronometer) findViewById(R.id.timer);
+        mTimer.setVisibility(View.VISIBLE);
+        mTimer.setBase(SystemClock.elapsedRealtime());
+        mTimer.setOnChronometerTickListener(new OnChronometerTickListener() {
             public void onChronometerTick(Chronometer chrono) {
-                // TODO Auto-generated method stub
-                if (!resume) {
-                    minutes = ((SystemClock.elapsedRealtime() - timer
+                if (!sResume) {
+                    minutes = ((SystemClock.elapsedRealtime() - mTimer
                             .getBase()) / 1000) / 60;
-                    seconds = ((SystemClock.elapsedRealtime() - timer
+                    seconds = ((SystemClock.elapsedRealtime() - mTimer
                             .getBase()) / 1000) % 60;
                     String secs = (seconds < 10) ? ("0"+((Integer)(int)seconds).toString()) : ((Integer)(int)seconds).toString();
                     String mins = (minutes < 10) ? ("0"+((Integer)(int)minutes).toString()) : ((Integer)(int)minutes).toString();
@@ -45,8 +53,8 @@ public class TimedMastermind extends Mastermind {
                     chrono.setPadding(10, 10, 10, 10);
                     elapsedTime = SystemClock.elapsedRealtime();
                 } else {
-                    minutes = ((elapsedTime - timer.getBase()) / 1000) / 60;
-                    seconds = ((elapsedTime - timer.getBase()) / 1000) % 60;
+                    minutes = ((elapsedTime - mTimer.getBase()) / 1000) / 60;
+                    seconds = ((elapsedTime - mTimer.getBase()) / 1000) % 60;
                     String secs = (seconds < 10) ? ("0"+((Integer)(int)seconds).toString()) : ((Integer)(int)seconds).toString();
                     String mins = (minutes < 10) ? ("0"+((Integer)(int)minutes).toString()) : ((Integer)(int)minutes).toString();
                     String currentTime = mins + ":" + secs;
@@ -57,29 +65,90 @@ public class TimedMastermind extends Mastermind {
             }
         });
 
-        timer.start();
-    }
+        mTimer.start();
+        mSensorListener = new ShakeEventListener();
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mSensorManager.registerListener(mSensorListener,
+            mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+            SensorManager.SENSOR_DELAY_UI);
+
+        mSensorListener.setOnShakeListener(new ShakeEventListener.OnShakeListener() {
+
+          public void onShake() {
+                  pauseGame();
+          }
+        });
+    } // onCreate
+
+    private void createPauseAlert(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Game Paused")
+                .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(final DialogInterface dialog){
+                        resume(dialog);
+                    }
+                })
+                .setNeutralButton("Resume",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(final DialogInterface dialog, final int id) {
+                                resume(dialog);
+                            }
+                        });
+
+        mPauseAlert = builder.create();
+        WindowManager.LayoutParams lp = mPauseAlert.getWindow().getAttributes();
+        lp.dimAmount=1.0f;
+        mPauseAlert.getWindow().setAttributes(lp);
+        mPauseAlert.getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
+        mPauseAlert.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+    } // createPauseAlert
+
+    private void pauseGame(){
+        mTimer.stop();
+        mPauseAlert.show();
+    } // pauseGame
+
+    private static boolean sStopped = false;
+    private void resume(final DialogInterface dialog){
+        dialog.dismiss();
+        sResume = true;
+        mTimer.start();
+    } // resume
+
+    @Override
+    protected void onResume() {
+      super.onResume();
+      if (sStopped)
+      {
+          pauseGame();
+          sStopped = false;
+      }
+      mSensorManager.registerListener(mSensorListener,
+          mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+          SensorManager.SENSOR_DELAY_UI);
+    } // onResume
 
     @Override
     protected void onPause() {
-        // TODO Auto-generated method stub
+        mTimer.stop();
+        sStopped = true;
         super.onPause();
-        timer.stop();
     }
 
     @Override
     protected void onStop() {
-        // TODO Auto-generated method stub
+        mSensorManager.unregisterListener(mSensorListener);
+        mTimer.stop();
+        sStopped = false;
         super.onStop();
-        timer.stop();
     }
 
     @Override
     protected void onRestart() {
-        // TODO Auto-generated method stub
         super.onRestart();
-        resume = true;
-        timer.start();
+        sResume = true;
+        mTimer.start();
     }
 
 
@@ -153,8 +222,8 @@ public class TimedMastermind extends Mastermind {
     private String timeScore;
     @Override
     protected void endGame() {
-        timer.stop();
-        time = (int)(((elapsedTime - timer.getBase()) / 1000));
+        mTimer.stop();
+        time = (int)(((elapsedTime - mTimer.getBase()) / 1000));
         minutes = time / 60;
         seconds = time % 60;
         String secs = (seconds < 10) ? ("0"+((Integer)(int)seconds).toString()) : ((Integer)(int)seconds).toString();
@@ -192,6 +261,35 @@ public class TimedMastermind extends Mastermind {
     @Override
     protected void loseGame() {
         super.loseGame();
-        timer.stop();
-    }
-}
+        mTimer.stop();
+    } // loseGame
+
+    private static final int MENU_PAUSE = Menu.FIRST+2;
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu)
+    {
+        menu.add(Menu.NONE, MENU_PAUSE, MENU_PAUSE, "Pause Game");
+        return super.onCreateOptionsMenu(menu);
+    } // onCreateOptionsMenu
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case MENU_NEW_GAME:
+                startActivity(new Intent(this, getClass()));
+                finish();
+                return true;
+            case MENU_INSTRUCTIONS:
+                startActivity(new Intent(this, Instructions.class));
+                return true;
+            case MENU_PAUSE:
+                pauseGame();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        } // switch
+    } // onOptionsItemSelected
+
+} // TimedMastermind
