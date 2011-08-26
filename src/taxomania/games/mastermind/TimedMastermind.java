@@ -23,9 +23,9 @@ import android.widget.Toast;
 
 public class TimedMastermind extends Mastermind {
     private Chronometer mTimer;
-    private static boolean sResume = false;
-    private int time;
-    private long elapsedTime, minutes, seconds;
+    private static boolean sResume = false, sStopped = false;
+    private int mTime;
+    private long mElapsedTime, mMinutes, mSeconds;
     private SensorManager mSensorManager;
     private ShakeEventListener mSensorListener;
     private AlertDialog mPauseAlert;
@@ -40,29 +40,25 @@ public class TimedMastermind extends Mastermind {
         mTimer.setVisibility(View.VISIBLE);
         mTimer.setBase(SystemClock.elapsedRealtime());
         mTimer.setOnChronometerTickListener(new OnChronometerTickListener() {
-            public void onChronometerTick(Chronometer chrono) {
+            public void onChronometerTick(final Chronometer chrono) {
                 if (!sResume) {
-                    minutes = ((SystemClock.elapsedRealtime() - mTimer
+                    mMinutes = ((SystemClock.elapsedRealtime() - mTimer
                             .getBase()) / 1000) / 60;
-                    seconds = ((SystemClock.elapsedRealtime() - mTimer
+                    mSeconds = ((SystemClock.elapsedRealtime() - mTimer
                             .getBase()) / 1000) % 60;
-                    String secs = (seconds < 10) ? ("0"+((Integer)(int)seconds).toString()) : ((Integer)(int)seconds).toString();
-                    String mins = (minutes < 10) ? ("0"+((Integer)(int)minutes).toString()) : ((Integer)(int)minutes).toString();
-                    String currentTime = mins + ":" + secs;
-                    chrono.setText(currentTime);
-                    chrono.setPadding(10, 10, 10, 10);
-                    elapsedTime = SystemClock.elapsedRealtime();
-                } else {
-                    minutes = ((elapsedTime - mTimer.getBase()) / 1000) / 60;
-                    seconds = ((elapsedTime - mTimer.getBase()) / 1000) % 60;
-                    String secs = (seconds < 10) ? ("0"+((Integer)(int)seconds).toString()) : ((Integer)(int)seconds).toString();
-                    String mins = (minutes < 10) ? ("0"+((Integer)(int)minutes).toString()) : ((Integer)(int)minutes).toString();
-                    String currentTime = mins + ":" + secs;
-                    chrono.setText(currentTime);
-                    chrono.setPadding(10, 10, 10, 10);
-                    elapsedTime = elapsedTime + 1000;
+                    mElapsedTime = SystemClock.elapsedRealtime();
                 }
-            }
+                else {
+                    mMinutes = ((mElapsedTime - mTimer.getBase()) / 1000) / 60;
+                    mSeconds = ((mElapsedTime - mTimer.getBase()) / 1000) % 60;
+                    mElapsedTime = mElapsedTime + 1000;
+                }
+                    final String secs = (mSeconds < 10) ? ("0"+((Integer)(int)mSeconds).toString()) : ((Integer)(int)mSeconds).toString();
+                    final String mins = (mMinutes < 10) ? ("0"+((Integer)(int)mMinutes).toString()) : ((Integer)(int)mMinutes).toString();
+                    final String currentTime = mins + ":" + secs;
+                    chrono.setText(currentTime);
+                    chrono.setPadding(10, 10, 10, 10);
+            } // onChronometerTick
         });
 
         mTimer.start();
@@ -75,8 +71,8 @@ public class TimedMastermind extends Mastermind {
         mSensorListener.setOnShakeListener(new ShakeEventListener.OnShakeListener() {
 
           public void onShake() {
-                  pauseGame();
-          }
+              pauseGame();
+          } // onShake
         });
     } // onCreate
 
@@ -97,7 +93,7 @@ public class TimedMastermind extends Mastermind {
                         });
 
         mPauseAlert = builder.create();
-        WindowManager.LayoutParams lp = mPauseAlert.getWindow().getAttributes();
+        final WindowManager.LayoutParams lp = mPauseAlert.getWindow().getAttributes();
         lp.dimAmount=1.0f;
         mPauseAlert.getWindow().setAttributes(lp);
         mPauseAlert.getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
@@ -109,7 +105,6 @@ public class TimedMastermind extends Mastermind {
         mPauseAlert.show();
     } // pauseGame
 
-    private static boolean sStopped = false;
     private void resume(final DialogInterface dialog){
         dialog.dismiss();
         sResume = true;
@@ -134,7 +129,7 @@ public class TimedMastermind extends Mastermind {
         mTimer.stop();
         sStopped = true;
         super.onPause();
-    }
+    } // onPause
 
     @Override
     protected void onStop() {
@@ -142,20 +137,18 @@ public class TimedMastermind extends Mastermind {
         mTimer.stop();
         sStopped = false;
         super.onStop();
-    }
+    } // onStop
 
     @Override
     protected void onRestart() {
         super.onRestart();
         sResume = true;
         mTimer.start();
-    }
-
+    } // onRestart
 
     private final class CheckIfHighScore extends AsyncTask<Integer,  Void, Boolean>{
         @Override
-        protected Boolean doInBackground(Integer... time)
-        {
+        protected Boolean doInBackground(Integer... time) {
             final DataHelper dh = DataHelper.getInstance(TimedMastermind.this);
             if (dh.getCount() < 7) return true;
             final List<Integer> list = dh.selectAllTimes();
@@ -165,14 +158,12 @@ public class TimedMastermind extends Mastermind {
         } // doInBackground
 
         @Override
-        protected void onPostExecute(Boolean newScore)
-        {
+        protected void onPostExecute(Boolean newScore) {
             if (newScore) enterName();
         } // onPostExecute
     } // CheckIfHighScore
 
     private final class AddLocalScore extends AsyncTask<Object, Void, Long> {
-
         @Override
         protected Long doInBackground(Object... params) {
             final DataHelper dh = DataHelper.getInstance(TimedMastermind.this);
@@ -180,15 +171,12 @@ public class TimedMastermind extends Mastermind {
         } // doInBackground
 
         @Override
-        protected void onPostExecute(Long result)
-        {
-            if (result == -1)
-            {
+        protected void onPostExecute(Long result){
+            if (result == -1) {
                 Toast.makeText(TimedMastermind.this, "There was an error submitting your score",
                         Toast.LENGTH_SHORT).show();
             }
         } // onPostExecute
-
     } // AddLocalScore
 
     private void enterName()
@@ -198,20 +186,20 @@ public class TimedMastermind extends Mastermind {
         final EditText userName = new EditText(this);
         builder.setView(userName).setMessage("Enter Your Name")
                 .setPositiveButton("Done",
-                        new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int whichButton)
-                    {
-                        new AddLocalScore().execute(userName.getText().toString(), time, guess);
-                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                        new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int whichButton) {
+                        new AddLocalScore().execute(userName.getText().toString(), mTime, guess);
+                        final InputMethodManager imm =
+                                (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(userName.getWindowToken(), 0);
                     }
                 }).setNegativeButton("Cancel",
                         new DialogInterface.OnClickListener()
                 {
-                    public void onClick(DialogInterface dialog, int whichButton)
+                    public void onClick(final DialogInterface dialog, final int whichButton)
                     {
-                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                        final InputMethodManager imm =
+                                (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(userName.getWindowToken(), 0);
                     }
                 });
@@ -219,42 +207,41 @@ public class TimedMastermind extends Mastermind {
         alert.show();
     }
 
-    private String timeScore;
     @Override
     protected void endGame() {
         mTimer.stop();
-        time = (int)(((elapsedTime - mTimer.getBase()) / 1000));
-        minutes = time / 60;
-        seconds = time % 60;
-        String secs = (seconds < 10) ? ("0"+((Integer)(int)seconds).toString()) : ((Integer)(int)seconds).toString();
-        String mins = (minutes < 10) ? ("0"+((Integer)(int)minutes).toString()) : ((Integer)(int)minutes).toString();
-        timeScore = mins + ":" + secs;
-        showEndAlert();
+        mTime = (int)(((mElapsedTime - mTimer.getBase()) / 1000));
+        mMinutes = mTime / 60;
+        mSeconds = mTime % 60;
+        final String secs = (mSeconds < 10) ? ("0"+((Integer)(int)mSeconds).toString()) : ((Integer)(int)mSeconds).toString();
+        final String mins = (mMinutes < 10) ? ("0"+((Integer)(int)mMinutes).toString()) : ((Integer)(int)mMinutes).toString();
 
-        new CheckIfHighScore().execute(time);
+        showEndAlert(mins + ":" + secs);
+
+        new CheckIfHighScore().execute(mTime);
     }
 
-    private void showEndAlert() {
+    private void showEndAlert(final String timeScore) {
         final Intent again = new Intent(this, TimedMastermind.class);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(
                 "Congratulations! You cracked the code in " + guess
                         + " attempts and in time " + timeScore + "!")
                 .setCancelable(false)
                 .setPositiveButton("Start Again",
                         new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
+                            public void onClick(final DialogInterface dialog, final int id) {
                                 startActivity(again);
                                 finish();
                             }
                         })
                 .setNegativeButton("Quit to Main Menu",
                         new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
+                            public void onClick(final DialogInterface dialog, final int id) {
                                 finish();
                             }
                         });
-        AlertDialog alert = builder.create();
+        final AlertDialog alert = builder.create();
         alert.show();
     }
 
