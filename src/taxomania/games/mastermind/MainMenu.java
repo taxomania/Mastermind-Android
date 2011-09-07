@@ -19,8 +19,8 @@ import android.view.View;
 
 public class MainMenu extends Activity {
     private static final String TAG = MainMenu.class.getSimpleName();
-    private static final String marketUri = "market://details?id=taxomania.games.mastermindpro";
-    private static final String webUri =
+    private static final String MARKET_URI = "market://details?id=taxomania.games.mastermindpro";
+    private static final String WEB_URI =
             "https://market.android.com/details?id=taxomania.games.mastermindpro";
 
     @Override
@@ -63,11 +63,11 @@ public class MainMenu extends Activity {
 
     public void onProClick(final View view) {
         final Intent browserIntent = new Intent(Intent.ACTION_VIEW);
-        browserIntent.setData(Uri.parse(marketUri));
+        browserIntent.setData(Uri.parse(MARKET_URI));
         try {
             startActivity(browserIntent);
         } catch (final ActivityNotFoundException e) {
-            browserIntent.setData(Uri.parse(webUri));
+            browserIntent.setData(Uri.parse(WEB_URI));
             try {
                 startActivity(browserIntent);
             } catch (final ActivityNotFoundException ee) {
