@@ -22,9 +22,8 @@ import android.widget.ImageView;
 public class Mastermind extends Activity {
     protected Engine mGame;
     // Constant declarations
-    protected static final int BLUE = 0, GREEN = 1, RED = 2, WHITE = 3,
-            YELLOW = 4, PURPLE = 5, TOTAL_PEG_SLOTS = 40, MAX_PEGS = 4,
-            MAX_GUESSES = 10;
+    protected static final int BLUE = 0, GREEN = 1, RED = 2, WHITE = 3, YELLOW = 4, PURPLE = 5,
+            TOTAL_PEG_SLOTS = 40, MAX_PEGS = 4, MAX_GUESSES = 10;
     // state[] shows which colour peg has been selected
     protected static Boolean[] sState = new Boolean[Engine.TOTAL_NO_PEGS];
     // slotPosition[] maps peg slots to view IDs
@@ -34,9 +33,8 @@ public class Mastermind extends Activity {
             sSmallPegSlots = new int[MAX_GUESSES][MAX_PEGS];
     protected static int sGuess;
     protected static Resources sResources;
-    protected static final int[] sPegs = { R.drawable.bluepeg,
-            R.drawable.greenpeg, R.drawable.redpeg, R.drawable.whitepeg,
-            R.drawable.yellowpeg, R.drawable.purplepeg };
+    protected static final int[] sPegs = { R.drawable.bluepeg, R.drawable.greenpeg,
+            R.drawable.redpeg, R.drawable.whitepeg, R.drawable.yellowpeg, R.drawable.purplepeg };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +59,7 @@ public class Mastermind extends Activity {
     }
 
     protected static final int MENU_NEW_GAME = Menu.FIRST;
-    protected static final int MENU_INSTRUCTIONS = Menu.FIRST+1;
+    protected static final int MENU_INSTRUCTIONS = Menu.FIRST + 1;
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
@@ -210,26 +208,26 @@ public class Mastermind extends Activity {
         for (int i = 0; i < sState.length; i++)
             if (sState[i]) {
                 switch (i) {
-                case BLUE:
-                    onBlue(findViewById(R.id.bluePeg));
-                    break;
-                case GREEN:
-                    onGreen(findViewById(R.id.greenPeg));
-                    break;
-                case RED:
-                    onRed(findViewById(R.id.redPeg));
-                    break;
-                case PURPLE:
-                    onPurple(findViewById(R.id.purplePeg));
-                    break;
-                case WHITE:
-                    onWhite(findViewById(R.id.whitePeg));
-                    break;
-                case YELLOW:
-                    onYellow(findViewById(R.id.yellowPeg));
-                    break;
-                default:
-                    break;
+                    case BLUE:
+                        onBlue(findViewById(R.id.bluePeg));
+                        break;
+                    case GREEN:
+                        onGreen(findViewById(R.id.greenPeg));
+                        break;
+                    case RED:
+                        onRed(findViewById(R.id.redPeg));
+                        break;
+                    case PURPLE:
+                        onPurple(findViewById(R.id.purplePeg));
+                        break;
+                    case WHITE:
+                        onWhite(findViewById(R.id.whitePeg));
+                        break;
+                    case YELLOW:
+                        onYellow(findViewById(R.id.yellowPeg));
+                        break;
+                    default:
+                        break;
                 } // switch
                 return;
             } // if
@@ -303,8 +301,7 @@ public class Mastermind extends Activity {
 
     protected static boolean checkGuess(final int viewID) {
         for (int i = 0; i < pegSlots[sGuess].length; i++)
-            if (pegSlots[sGuess][i] == viewID)
-                return true;
+            if (pegSlots[sGuess][i] == viewID) return true;
         return false;
     } // checkGuess
 
@@ -312,97 +309,97 @@ public class Mastermind extends Activity {
         boolean check = true;
         ImageView view = null;
         switch (sGuess) {
-        case 0:
-            for (int i = 0; i < 4; i++)
-                if (((ImageView) findViewById(sSlotPosition[i])).getDrawable() == null) {
-                    check = false;
-                    break;
-                }
-            view = (ImageView) findViewById(R.id.confirm10);
-            break;
+            case 0:
+                for (int i = 0; i < 4; i++)
+                    if (((ImageView) findViewById(sSlotPosition[i])).getDrawable() == null) {
+                        check = false;
+                        break;
+                    }
+                view = (ImageView) findViewById(R.id.confirm10);
+                break;
 
-        case 1:
-            for (int i = 4; i < 8; i++)
-                if (((ImageView) findViewById(sSlotPosition[i])).getDrawable() == null) {
-                    check = false;
-                    break;
-                }
-            view = (ImageView) findViewById(R.id.confirm09);
-            break;
+            case 1:
+                for (int i = 4; i < 8; i++)
+                    if (((ImageView) findViewById(sSlotPosition[i])).getDrawable() == null) {
+                        check = false;
+                        break;
+                    }
+                view = (ImageView) findViewById(R.id.confirm09);
+                break;
 
-        case 2:
-            for (int i = 8; i < 12; i++)
-                if (((ImageView) findViewById(sSlotPosition[i])).getDrawable() == null) {
-                    check = false;
-                    break;
-                }
-            view = (ImageView) findViewById(R.id.confirm08);
-            break;
+            case 2:
+                for (int i = 8; i < 12; i++)
+                    if (((ImageView) findViewById(sSlotPosition[i])).getDrawable() == null) {
+                        check = false;
+                        break;
+                    }
+                view = (ImageView) findViewById(R.id.confirm08);
+                break;
 
-        case 3:
-            for (int i = 12; i < 16; i++)
-                if (((ImageView) findViewById(sSlotPosition[i])).getDrawable() == null) {
-                    check = false;
-                    break;
-                }
-            view = (ImageView) findViewById(R.id.confirm07);
-            break;
+            case 3:
+                for (int i = 12; i < 16; i++)
+                    if (((ImageView) findViewById(sSlotPosition[i])).getDrawable() == null) {
+                        check = false;
+                        break;
+                    }
+                view = (ImageView) findViewById(R.id.confirm07);
+                break;
 
-        case 4:
-            for (int i = 16; i < 20; i++)
-                if (((ImageView) findViewById(sSlotPosition[i])).getDrawable() == null) {
-                    check = false;
-                    break;
-                }
-            view = (ImageView) findViewById(R.id.confirm06);
-            break;
+            case 4:
+                for (int i = 16; i < 20; i++)
+                    if (((ImageView) findViewById(sSlotPosition[i])).getDrawable() == null) {
+                        check = false;
+                        break;
+                    }
+                view = (ImageView) findViewById(R.id.confirm06);
+                break;
 
-        case 5:
-            for (int i = 20; i < 24; i++)
-                if (((ImageView) findViewById(sSlotPosition[i])).getDrawable() == null) {
-                    check = false;
-                    break;
-                }
-            view = (ImageView) findViewById(R.id.confirm05);
-            break;
+            case 5:
+                for (int i = 20; i < 24; i++)
+                    if (((ImageView) findViewById(sSlotPosition[i])).getDrawable() == null) {
+                        check = false;
+                        break;
+                    }
+                view = (ImageView) findViewById(R.id.confirm05);
+                break;
 
-        case 6:
-            for (int i = 24; i < 28; i++)
-                if (((ImageView) findViewById(sSlotPosition[i])).getDrawable() == null) {
-                    check = false;
-                    break;
-                }
-            view = (ImageView) findViewById(R.id.confirm04);
-            break;
+            case 6:
+                for (int i = 24; i < 28; i++)
+                    if (((ImageView) findViewById(sSlotPosition[i])).getDrawable() == null) {
+                        check = false;
+                        break;
+                    }
+                view = (ImageView) findViewById(R.id.confirm04);
+                break;
 
-        case 7:
-            for (int i = 28; i < 32; i++)
-                if (((ImageView) findViewById(sSlotPosition[i])).getDrawable() == null) {
-                    check = false;
-                    break;
-                }
-            view = (ImageView) findViewById(R.id.confirm03);
-            break;
+            case 7:
+                for (int i = 28; i < 32; i++)
+                    if (((ImageView) findViewById(sSlotPosition[i])).getDrawable() == null) {
+                        check = false;
+                        break;
+                    }
+                view = (ImageView) findViewById(R.id.confirm03);
+                break;
 
-        case 8:
-            for (int i = 32; i < 36; i++)
-                if (((ImageView) findViewById(sSlotPosition[i])).getDrawable() == null) {
-                    check = false;
-                    break;
-                }
-            view = (ImageView) findViewById(R.id.confirm02);
-            break;
+            case 8:
+                for (int i = 32; i < 36; i++)
+                    if (((ImageView) findViewById(sSlotPosition[i])).getDrawable() == null) {
+                        check = false;
+                        break;
+                    }
+                view = (ImageView) findViewById(R.id.confirm02);
+                break;
 
-        case 9:
-            for (int i = 36; i < 40; i++)
-                if (((ImageView) findViewById(sSlotPosition[i])).getDrawable() == null) {
-                    check = false;
-                    break;
-                }
-            view = (ImageView) findViewById(R.id.confirm01);
-            break;
-        default:
-            break;
+            case 9:
+                for (int i = 36; i < 40; i++)
+                    if (((ImageView) findViewById(sSlotPosition[i])).getDrawable() == null) {
+                        check = false;
+                        break;
+                    }
+                view = (ImageView) findViewById(R.id.confirm01);
+                break;
+            default:
+                break;
         }
         if (check) {
             view.setImageDrawable(sResources.getDrawable(R.drawable.confirm));
@@ -414,49 +411,48 @@ public class Mastermind extends Activity {
     } // checkPegs
 
     public void select(final View view) {
-        if (!checkGuess(view.getId()))
-            return;
+        if (!checkGuess(view.getId())) return;
         for (int i = 0; i < sState.length; i++)
             if (sState[i]) {
                 switch (i) {
-                case BLUE:
-                    ((ImageView) view).setImageDrawable(sResources
-                            .getDrawable(R.drawable.bluepeg));
-                    view.setTag(R.drawable.bluepeg);
-                    onBlue(findViewById(R.id.bluePeg));
-                    break;
-                case RED:
-                    ((ImageView) view).setImageDrawable(sResources
-                            .getDrawable(R.drawable.redpeg));
-                    view.setTag(R.drawable.redpeg);
-                    onRed(findViewById(R.id.redPeg));
-                    break;
-                case WHITE:
-                    ((ImageView) view).setImageDrawable(sResources
-                            .getDrawable(R.drawable.whitepeg));
-                    view.setTag(R.drawable.whitepeg);
-                    onWhite(findViewById(R.id.whitePeg));
-                    break;
-                case YELLOW:
-                    ((ImageView) view).setImageDrawable(sResources
-                            .getDrawable(R.drawable.yellowpeg));
-                    view.setTag(R.drawable.yellowpeg);
-                    onYellow(findViewById(R.id.yellowPeg));
-                    break;
-                case GREEN:
-                    ((ImageView) view).setImageDrawable(sResources
-                            .getDrawable(R.drawable.greenpeg));
-                    view.setTag(R.drawable.greenpeg);
-                    onGreen(findViewById(R.id.greenPeg));
-                    break;
-                case PURPLE:
-                    ((ImageView) view).setImageDrawable(sResources
-                            .getDrawable(R.drawable.purplepeg));
-                    view.setTag(R.drawable.purplepeg);
-                    onPurple(findViewById(R.id.purplePeg));
-                    break;
-                default:
-                    break;
+                    case BLUE:
+                        ((ImageView) view).setImageDrawable(sResources
+                                .getDrawable(R.drawable.bluepeg));
+                        view.setTag(R.drawable.bluepeg);
+                        onBlue(findViewById(R.id.bluePeg));
+                        break;
+                    case RED:
+                        ((ImageView) view).setImageDrawable(sResources
+                                .getDrawable(R.drawable.redpeg));
+                        view.setTag(R.drawable.redpeg);
+                        onRed(findViewById(R.id.redPeg));
+                        break;
+                    case WHITE:
+                        ((ImageView) view).setImageDrawable(sResources
+                                .getDrawable(R.drawable.whitepeg));
+                        view.setTag(R.drawable.whitepeg);
+                        onWhite(findViewById(R.id.whitePeg));
+                        break;
+                    case YELLOW:
+                        ((ImageView) view).setImageDrawable(sResources
+                                .getDrawable(R.drawable.yellowpeg));
+                        view.setTag(R.drawable.yellowpeg);
+                        onYellow(findViewById(R.id.yellowPeg));
+                        break;
+                    case GREEN:
+                        ((ImageView) view).setImageDrawable(sResources
+                                .getDrawable(R.drawable.greenpeg));
+                        view.setTag(R.drawable.greenpeg);
+                        onGreen(findViewById(R.id.greenPeg));
+                        break;
+                    case PURPLE:
+                        ((ImageView) view).setImageDrawable(sResources
+                                .getDrawable(R.drawable.purplepeg));
+                        view.setTag(R.drawable.purplepeg);
+                        onPurple(findViewById(R.id.purplePeg));
+                        break;
+                    default:
+                        break;
                 }
                 checkPegs();
                 return;
@@ -479,8 +475,7 @@ public class Mastermind extends Activity {
                 attempt[i] = sPegs[3];
             else if (tags[i] == sPegs[4])
                 attempt[i] = sPegs[4];
-            else if (tags[i] == sPegs[5])
-                attempt[i] = sPegs[5];
+            else if (tags[i] == sPegs[5]) attempt[i] = sPegs[5];
 
         return attempt;
     } // parseAttempt
@@ -509,8 +504,7 @@ public class Mastermind extends Activity {
         // colour and position, all are correct
         if (resp[0] == CORRECT_COLOUR_POSITION)
             return true;
-        else
-            return false;
+        else return false;
     } // parseResponse
 
     protected int[] makeResponse(final boolean[] pos, final boolean[] col) {
@@ -521,8 +515,7 @@ public class Mastermind extends Activity {
                 resp[i] = CORRECT_COLOUR_POSITION;
             else
             // If in wrong position, return 1
-            if (col[i])
-                resp[i] = CORRECT_COLOUR_WRONG_POSITION;
+            if (col[i]) resp[i] = CORRECT_COLOUR_WRONG_POSITION;
 
         return resp;
     } // makeResponse
@@ -541,45 +534,40 @@ public class Mastermind extends Activity {
 
         // Then check if the peg is in the wrong position
         for (int i = 0; i < MAX_PEGS; i++)
-            if (!pos[i])
-                col[i] = mGame.checkPeg(attempt[i]);
+            if (!pos[i]) col[i] = mGame.checkPeg(attempt[i]);
 
         // Pass the result onto the user through use of the smaller pegs
         final boolean correct = parseResponse(makeResponse(pos, col));
 
         sGuess++;
         // If the attempt is correct, end the game
-        if (correct) endGame();
+        if (correct)
+            endGame();
         else {
             // Lose
-            if (sGuess == MAX_GUESSES) {loseGame();}
-            else {
+            if (sGuess == MAX_GUESSES) {
+                loseGame();
+            } else {
                 checkPegs();
                 mGame.resetStates();
             }
         } // else
     } // confirm
 
-    protected void loseGame(){
+    protected void loseGame() {
         final Intent again = new Intent(this, this.getClass());
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("You failed to crack the code!")
-                .setCancelable(false)
-                .setPositiveButton("Try Again",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,
-                                    int id) {
-                                startActivity(again);
-                                finish();
-                            }
-                        })
-                .setNegativeButton("Quit to Main Menu",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,
-                                    int id) {
-                                finish();
-                            }
-                        });
+        builder.setMessage("You failed to crack the code!").setCancelable(false)
+                .setPositiveButton("Try Again", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        startActivity(again);
+                        finish();
+                    }
+                }).setNegativeButton("Quit to Main Menu", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                });
         final AlertDialog alert = builder.create();
         alert.show();
     } // loseGame
@@ -587,23 +575,18 @@ public class Mastermind extends Activity {
     protected void endGame() {
         final Intent again = new Intent(this, Mastermind.class);
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(
-                "Congratulations! You cracked the code in " + sGuess
-                        + " attempts!")
+        builder.setMessage("Congratulations! You cracked the code in " + sGuess + " attempts!")
                 .setCancelable(false)
-                .setPositiveButton("Start Again",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                startActivity(again);
-                                finish();
-                            }
-                        })
-                .setNegativeButton("Quit to Main Menu",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                finish();
-                            }
-                        });
+                .setPositiveButton("Start Again", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        startActivity(again);
+                        finish();
+                    }
+                }).setNegativeButton("Quit to Main Menu", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                });
         final AlertDialog alert = builder.create();
         alert.show();
     } // endGame
