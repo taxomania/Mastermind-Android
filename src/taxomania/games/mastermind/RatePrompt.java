@@ -19,8 +19,8 @@ import android.widget.Button;
  */
 public class RatePrompt {
     private static final String TAG = RatePrompt.class.getSimpleName();
-    private static final String marketUri = "market://details?id=";
-    private static final String webUri = "https://market.android.com/details?id=";
+    private static final String MARKET_URI = "market://details?id=";
+    private static final String WEB_URI = "https://market.android.com/details?id=";
     private static final int LAUNCHES_TO_PROMPT = 6;
 
     private static int sLaunches = 0;
@@ -30,7 +30,6 @@ public class RatePrompt {
     public static void appLaunched(final Context context) {
         if (sDoesPrompt) {
             sLaunches++;
-            Log.d(TAG, "App launched " + sLaunches + " times");
             if (sLaunches == LAUNCHES_TO_PROMPT) {
                 prompt(context);
             } // if
@@ -64,11 +63,11 @@ public class RatePrompt {
             @Override
             public void onClick(final View v) {
                 final Intent browserIntent = new Intent(Intent.ACTION_VIEW);
-                browserIntent.setData(Uri.parse(marketUri + context.getPackageName()));
+                browserIntent.setData(Uri.parse(MARKET_URI + context.getPackageName()));
                 try {
                     context.startActivity(browserIntent);
                 } catch (final ActivityNotFoundException e) {
-                    browserIntent.setData(Uri.parse(webUri + context.getPackageName()));
+                    browserIntent.setData(Uri.parse(WEB_URI + context.getPackageName()));
                     try {
                         context.startActivity(browserIntent);
                     } catch (final ActivityNotFoundException ee) {
