@@ -19,14 +19,16 @@ import android.view.View;
 
 public class MainMenu extends Activity {
     private static final String TAG = MainMenu.class.getSimpleName();
-    private static final String marketUri = "market://details?id=";
-    private static final String webUri = "https://market.android.com/details?id=";
+    private static final String marketUri = "market://details?id=taxomania.games.mastermindpro";
+    private static final String webUri =
+            "https://market.android.com/details?id=taxomania.games.mastermindpro";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        RatePrompt.appLaunched(this);
     }
 
     private void newGameDialog() {
@@ -61,11 +63,11 @@ public class MainMenu extends Activity {
 
     public void onProClick(final View view) {
         final Intent browserIntent = new Intent(Intent.ACTION_VIEW);
-        browserIntent.setData(Uri.parse(marketUri + getPackageName()));
+        browserIntent.setData(Uri.parse(marketUri));
         try {
             startActivity(browserIntent);
         } catch (final ActivityNotFoundException e) {
-            browserIntent.setData(Uri.parse(webUri + getPackageName()));
+            browserIntent.setData(Uri.parse(webUri));
             try {
                 startActivity(browserIntent);
             } catch (final ActivityNotFoundException ee) {

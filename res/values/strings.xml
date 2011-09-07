@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">Mastermind</string>
     <color name="white">#FFFFFF</color>
+    <string name="rate">If you enjoy playing Mastermind, would you mind taking the time to rate it? Thanks for your support!</string>
 </resources>
