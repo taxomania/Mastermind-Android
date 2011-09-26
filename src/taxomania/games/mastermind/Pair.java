@@ -1,16 +1,23 @@
 package taxomania.games.mastermind;
 
 public class Pair {
-	private int peg;
-	private boolean ready;
+    private final int mPeg;
+    private boolean mReady;
 
-	public Pair(int p) {
-		peg = p;
-		ready = true;
-	}
-	
-	public int getPeg(){return this.peg;}
-	public void setPeg(int p){peg = p;}
-	public boolean getReady(){return this.ready;}
-	public void setReady(boolean b){ready = b;}
-}
+    public Pair(final int p) {
+        mPeg = p;
+        mReady = true;
+    } // Pair(int)
+
+    public int getPeg() {
+        return this.mPeg;
+    } // getPeg()
+
+    public boolean getReady() {
+        return this.mReady;
+    } // getReady()
+
+    public void setReady(final boolean b) {
+        mReady = b;
+    } // setReady(boolean)
+} // Pair
