@@ -16,21 +16,21 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 public class HighScoreActivity extends Activity {
-    private TableLayout highScoreTable;
+    private TableLayout mHighScoreTable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.high_score_layout);
-        highScoreTable = (TableLayout) findViewById(R.id.highScoreTable);
+        mHighScoreTable = (TableLayout) findViewById(R.id.highScoreTable);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         new PrintHighScores().execute(false);
-    }
+    } // onCreate(Bundle)
 
     private void addHeaders() {
         final TableRow tr = new TableRow(this);
-        highScoreTable.addView(tr);
+        mHighScoreTable.addView(tr);
 
         final TextView rankText = new TextView(this);
         rankText.setText("Rank");
@@ -53,13 +53,13 @@ public class HighScoreActivity extends Activity {
         gText.setTextColor(Color.WHITE);
         gText.setGravity(Gravity.CENTER);
         tr.addView(gText);
-    }
+    } // addHeaders()
 
-    private void printScores(final List<Map<String, Object>> scores){
+    private void printScores(final List<Map<String, Object>> scores) {
         int i = 1;
-        for (Map<String, Object> score : scores) {
+        for (final Map<String, Object> score : scores) {
             final TableRow tr = new TableRow(this);
-            highScoreTable.addView(tr);
+            mHighScoreTable.addView(tr);
 
             final TextView rankText = new TextView(this);
             rankText.setText(((Integer) i).toString());
@@ -73,16 +73,8 @@ public class HighScoreActivity extends Activity {
             nameText.setTextColor(Color.WHITE);
             tr.addView(nameText);
 
-            final int time = (Integer) score.get(DataHelper.Scores.TIME);
-            final int minutes = time / 60;
-            final int seconds = time % 60;
-            final String secs = (seconds < 10) ? ("0" + seconds) : ((Integer) seconds)
-                    .toString();
-            final String mins = (minutes < 10) ? ("0" + minutes) : ((Integer) minutes)
-                    .toString();
-
             final TextView scoreText = new TextView(this);
-            scoreText.setText(mins + ":" + secs);
+            scoreText.setText(getTimeString((Integer) score.get(DataHelper.Scores.TIME)));
             scoreText.setTextColor(Color.WHITE);
             tr.addView(scoreText);
 
@@ -92,29 +84,37 @@ public class HighScoreActivity extends Activity {
             gText.setTextColor(Color.WHITE);
             tr.addView(gText);
         } // for each score
-    } // printScores
+    } // printScores(List<Map<String,Object>>)
 
-    private final class PrintHighScores extends AsyncTask<Boolean, Void, List<Map<String, Object>>>{
+    // This method can be made public static for reusability
+    private String getTimeString(final int time) {
+        final int minutes = time / 60;
+        final int seconds = time % 60;
+        final String secs = (seconds < 10) ? ("0" + seconds) : ((Integer) seconds).toString();
+        final String mins = (minutes < 10) ? ("0" + minutes) : ((Integer) minutes).toString();
+        return mins + ":" + secs;
+    } // getTimeString(int)
 
+    private final class PrintHighScores extends AsyncTask<Boolean, Void, List<Map<String, Object>>> {
         @Override
         protected void onPreExecute() {
-            highScoreTable.removeAllViewsInLayout();
+            mHighScoreTable.removeAllViewsInLayout();
             addHeaders();
-        } // onPreExecute
+        } // onPreExecute()
 
         @Override
-        protected List<Map<String, Object>> doInBackground(Boolean... delete) {
+        protected List<Map<String, Object>> doInBackground(final Boolean... delete) {
             final DataHelper dh = DataHelper.getInstance(HighScoreActivity.this);
-            if (delete[0]){
+            if (delete[0]) {
                 dh.deleteAll();
-            }
+            } // if
             return dh.selectAll();
-        } // doInBackground
+        } // doInBackground(Boolean)
 
         @Override
         protected void onPostExecute(final List<Map<String, Object>> scores) {
             printScores(scores);
-        } // onPostExecute
+        } // onPostExecute(List<Map<String,Object>>)
     } // PrintHighScores
 
     private static final int MENU_RESET = Menu.FIRST;
@@ -124,17 +124,17 @@ public class HighScoreActivity extends Activity {
         super.onCreateOptionsMenu(menu);
         menu.add(0, MENU_RESET, 0, "Reset High Scores");
         return true;
-    } // onCreateOptionsMenu
+    } // onCreateOptionsMenu(Menu)
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case MENU_RESET:
                 new PrintHighScores().execute(true);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         } // switch
-    } // onOptionsItemSelected
+    } // onOptionsItemSelected(MenuItem)
 
 } // class HighScoreActivity

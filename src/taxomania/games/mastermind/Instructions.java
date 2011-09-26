@@ -29,5 +29,5 @@ public class Instructions extends Activity {
         v.setPadding(padding, padding, padding, padding);
         v.setTextColor(Color.WHITE);
         v.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg));
-    }
-}
+    } // onCreate(Bundle)
+} // Instructions
