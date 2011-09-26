@@ -29,7 +29,7 @@ public class MainMenu extends Activity {
         setContentView(R.layout.main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         RatePrompt.appLaunched(this);
-    }
+    } // onCreate(Bundle)
 
     private void newGameDialog() {
         final Intent classic = new Intent(this, Mastermind.class);
@@ -37,29 +37,29 @@ public class MainMenu extends Activity {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Select game mode").setCancelable(true)
                 .setPositiveButton("Classic", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                    public void onClick(final DialogInterface dialog, final int id) {
                         startActivity(classic);
-                    }
+                    } // onClick(DialogInterface, int)
                 }).setNegativeButton("Timed", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                    public void onClick(final DialogInterface dialog, final int id) {
                         startActivity(timed);
-                    }
+                    } // onClick(DialogInterface, int)
                 });
         final AlertDialog alert = builder.create();
         alert.show();
-    }
+    } // newGameDialog()
 
     public void onScoresClick(final View view) {
         startActivity(new Intent(this, HighScoreActivity.class));
-    }
+    } // onScoresClick(View)
 
     public void onNewGameClick(final View view) {
         newGameDialog();
-    }
+    } // onNewGameClick(View)
 
     public void onInstructionsClick(final View view) {
         startActivity(new Intent(this, Instructions.class));
-    }
+    } // onInstructionsClick(View)
 
     public void onProClick(final View view) {
         final Intent browserIntent = new Intent(Intent.ACTION_VIEW);
@@ -74,9 +74,9 @@ public class MainMenu extends Activity {
                 Log.e(TAG, "Could not open app page");
             } // catch
         } // catch
-    }
+    } // onProClick(View)
 
     public void onQuitClick(final View view) {
         finish();
-    }
-}
+    } // onQuitClick(View)
+} // MainMenu
