@@ -58,7 +58,7 @@ public class TimedMastermind extends Mastermind {
                 final String currentTime = mins + ":" + secs;
                 chrono.setText(currentTime);
                 chrono.setPadding(10, 10, 10, 10);
-            } // onChronometerTick
+            } // onChronometerTick(Chronometer)
         });
 
         mTimer.start();
@@ -72,9 +72,9 @@ public class TimedMastermind extends Mastermind {
 
             public void onShake() {
                 pauseGame();
-            } // onShake
+            } // onShake()
         });
-    } // onCreate
+    } // onCreate(Bundle)
 
     private void createPauseAlert() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -83,11 +83,11 @@ public class TimedMastermind extends Mastermind {
                     @Override
                     public void onCancel(final DialogInterface dialog) {
                         resume(dialog);
-                    }
+                    } // onCancel(DialogInterface)
                 }).setNeutralButton("Resume", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
                         resume(dialog);
-                    }
+                    } // onClick(DialogInterface, int)
                 });
 
         mPauseAlert = builder.create();
@@ -96,18 +96,18 @@ public class TimedMastermind extends Mastermind {
         mPauseAlert.getWindow().setAttributes(lp);
         mPauseAlert.getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
         mPauseAlert.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-    } // createPauseAlert
+    } // createPauseAlert()
 
     private void pauseGame() {
         mTimer.stop();
         mPauseAlert.show();
-    } // pauseGame
+    } // pauseGame()
 
     private void resume(final DialogInterface dialog) {
         dialog.dismiss();
         mResume = true;
         mTimer.start();
-    } // resume
+    } // resume(DialogInterface)
 
     @Override
     protected void onResume() {
@@ -115,18 +115,18 @@ public class TimedMastermind extends Mastermind {
         if (mStopped) {
             pauseGame();
             mStopped = false;
-        }
+        } // if
         mSensorManager.registerListener(mSensorListener,
                 mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
                 SensorManager.SENSOR_DELAY_UI);
-    } // onResume
+    } // onResume()
 
     @Override
     protected void onPause() {
         mTimer.stop();
         mStopped = true;
         super.onPause();
-    } // onPause
+    } // onPause()
 
     @Override
     protected void onStop() {
@@ -134,46 +134,46 @@ public class TimedMastermind extends Mastermind {
         mTimer.stop();
         mStopped = false;
         super.onStop();
-    } // onStop
+    } // onStop()
 
     @Override
     protected void onRestart() {
         super.onRestart();
         mResume = true;
         mTimer.start();
-    } // onRestart
+    } // onRestart()
 
     private final class CheckIfHighScore extends AsyncTask<Integer, Void, Boolean> {
         @Override
-        protected Boolean doInBackground(Integer... time) {
+        protected Boolean doInBackground(final Integer... time) {
             final DataHelper dh = DataHelper.getInstance(TimedMastermind.this);
             if (dh.getCount() < 7) return true;
             final List<Integer> list = dh.selectAllTimes();
             final int last = list.get(list.size() - 1);
             if (time[0] < last) return true;
             return false;
-        } // doInBackground
+        } // doInBackground(Integer...)
 
         @Override
-        protected void onPostExecute(Boolean newScore) {
+        protected void onPostExecute(final Boolean newScore) {
             if (newScore) enterName();
-        } // onPostExecute
+        } // onPostExecute(Boolean)
     } // CheckIfHighScore
 
     private final class AddLocalScore extends AsyncTask<Object, Void, Long> {
         @Override
-        protected Long doInBackground(Object... params) {
+        protected Long doInBackground(final Object... params) {
             final DataHelper dh = DataHelper.getInstance(TimedMastermind.this);
             return dh.insert(params[0].toString(), (Integer) params[1], (Integer) params[2]);
-        } // doInBackground
+        } // doInBackground(Object...)
 
         @Override
-        protected void onPostExecute(Long result) {
+        protected void onPostExecute(final Long result) {
             if (result == -1) {
                 Toast.makeText(TimedMastermind.this, "There was an error submitting your score",
                         Toast.LENGTH_SHORT).show();
-            }
-        } // onPostExecute
+            } // if
+        } // onPostExecute(Long)
     } // AddLocalScore
 
     private void enterName() {
@@ -184,19 +184,19 @@ public class TimedMastermind extends Mastermind {
         builder.setView(userName).setMessage("Enter Your Name")
                 .setPositiveButton("Done", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int whichButton) {
-                        new AddLocalScore().execute(userName.getText().toString(), mTime, sGuess);
+                        new AddLocalScore().execute(userName.getText().toString(), mTime, mGuess);
                         final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(userName.getWindowToken(), 0);
-                    }
+                    } // onClick(DialogInterface, int)
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int whichButton) {
                         final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(userName.getWindowToken(), 0);
-                    }
+                    } // onClick(DialogInterface, int)
                 });
         final AlertDialog alert = builder.create();
         alert.show();
-    }
+    } // enterName()
 
     @Override
     protected void endGame() {
@@ -212,13 +212,13 @@ public class TimedMastermind extends Mastermind {
         showEndAlert(mins + ":" + secs);
 
         new CheckIfHighScore().execute(mTime);
-    }
+    } // endGame()
 
     private void showEndAlert(final String timeScore) {
         final Intent again = new Intent(this, TimedMastermind.class);
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(
-                "Congratulations! You cracked the code in " + sGuess + " attempts and in time "
+                "Congratulations! You cracked the code in " + mGuess + " attempts and in time "
                         + timeScore + "!").setCancelable(false)
                 .setPositiveButton("Start Again", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
@@ -232,13 +232,13 @@ public class TimedMastermind extends Mastermind {
                 });
         final AlertDialog alert = builder.create();
         alert.show();
-    }
+    } // showEndAlert(String)
 
     @Override
     protected void loseGame() {
         super.loseGame();
         mTimer.stop();
-    } // loseGame
+    } // loseGame()
 
     private static final int MENU_PAUSE = Menu.FIRST + 2;
 
@@ -246,7 +246,7 @@ public class TimedMastermind extends Mastermind {
     public boolean onCreateOptionsMenu(final Menu menu) {
         menu.add(Menu.NONE, MENU_PAUSE, MENU_PAUSE, "Pause Game");
         return super.onCreateOptionsMenu(menu);
-    } // onCreateOptionsMenu
+    } // onCreateOptionsMenu(Menu)
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
@@ -265,6 +265,6 @@ public class TimedMastermind extends Mastermind {
             default:
                 return super.onOptionsItemSelected(item);
         } // switch
-    } // onOptionsItemSelected
+    } // onOptionsItemSelected(MenuItem)
 
 } // TimedMastermind
