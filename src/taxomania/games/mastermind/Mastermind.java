@@ -572,8 +572,8 @@ public class Mastermind extends Activity {
     protected void loseGame() {
         final Intent again = new Intent(this, this.getClass());
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("You failed to crack the code!").setCancelable(false)
-                .setPositiveButton("Try Again", new DialogInterface.OnClickListener() {
+        builder.setMessage("You failed to crack the code!").setCancelable(true)
+                .setNeutralButton("Try Again", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
                         startActivity(again);
                         finish();
@@ -581,6 +581,11 @@ public class Mastermind extends Activity {
                 }).setNegativeButton("Quit to Main Menu", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
                         finish();
+                    } // onClick(DialogInterface, int)
+                }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(final DialogInterface dialog, final int which) {
+                        dialog.dismiss();
                     } // onClick(DialogInterface, int)
                 });
         final AlertDialog alert = builder.create();
@@ -591,8 +596,8 @@ public class Mastermind extends Activity {
         final Intent again = new Intent(this, Mastermind.class);
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Congratulations! You cracked the code in " + mGuess + " attempts!")
-                .setCancelable(false)
-                .setPositiveButton("Start Again", new DialogInterface.OnClickListener() {
+                .setCancelable(true)
+                .setNeutralButton("Start Again", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
                         startActivity(again);
                         finish();
@@ -600,6 +605,11 @@ public class Mastermind extends Activity {
                 }).setNegativeButton("Quit to Main Menu", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
                         finish();
+                    } // onClick(DialogInterface, int)
+                }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(final DialogInterface dialog, final int which) {
+                        dialog.dismiss();
                     } // onClick(DialogInterface, int)
                 });
         final AlertDialog alert = builder.create();
