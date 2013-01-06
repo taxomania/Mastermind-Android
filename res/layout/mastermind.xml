@@ -1,413 +1,740 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent" android:layout_height="fill_parent"
-    android:id="@+id/mastermindLayout" android:background="@drawable/bg">
-    <ScrollView android:layout_marginTop="25dp" android:layout_above="@+id/purplePeg"
-         android:layout_height="fill_parent" android:layout_width="fill_parent">
-        <TableLayout android:layout_gravity="center_vertical"
-            android:layout_height="fill_parent" android:layout_width="fill_parent">
+    android:id="@+id/mastermindLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg" >
+
+    <Chronometer
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:padding="5dp"
+        android:text=""
+        android:visibility="invisible" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/selection"
+        android:layout_below="@id/timer"
+        android:paddingLeft="20dp"
+        android:paddingTop="5dp" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
             <!-- guess 10 -->
-            <TableRow>
-                <RelativeLayout>
-                    <ImageView android:id="@+id/smallPeg1"
-                        android:layout_marginLeft="20dp" android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg2"
-                        android:layout_toRightOf="@+id/smallPeg1" android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg3"
-                        android:layout_marginLeft="20dp" android:layout_below="@+id/smallPeg1"
-                        android:layout_height="wrap_content" android:layout_width="wrap_content"
-                        android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg4"
-                        android:layout_below="@+id/smallPeg2" android:layout_toRightOf="@+id/smallPeg3"
-                        android:layout_height="wrap_content" android:layout_width="wrap_content"
-                        android:background="@drawable/smallslot"></ImageView>
 
-                    <ImageView android:id="@+id/peg01" android:layout_height="wrap_content"
-                        android:onClick="select" android:layout_toRightOf="@+id/smallPeg2"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg02"
-                        android:layout_toRightOf="@+id/peg01" android:onClick="select"
-                        android:layout_height="wrap_content" android:background="@drawable/pegslot"
-                        android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg03"
-                        android:layout_toRightOf="@+id/peg02" android:onClick="select"
-                        android:layout_height="wrap_content" android:background="@drawable/pegslot"
-                        android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg04" android:layout_height="wrap_content"
-                        android:onClick="select" android:layout_toRightOf="@+id/peg03"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
 
-                    <ImageView android:id="@+id/confirm01"
-                        android:layout_height="wrap_content" android:onClick="confirm"
-                        android:layout_toRightOf="@+id/peg04" android:layout_width="wrap_content"></ImageView>
-                </RelativeLayout>
-            </TableRow>
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/smallPeg1" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/smallPeg1" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/smallPeg2"
+                    android:layout_toRightOf="@+id/smallPeg3" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/smallPeg2"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg01"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg02"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg04"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg03"
+                    android:onClick="select" />
+
+                <ImageView
+                    android:id="@+id/confirm01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg04"
+                    android:onClick="confirm" />
+            </RelativeLayout>
 
             <!-- guess 9 -->
-            <TableRow>
-                <RelativeLayout>
-                    <ImageView android:id="@+id/smallPeg5"
-                        android:layout_marginLeft="20dp" android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg6"
-                        android:layout_toRightOf="@+id/smallPeg5" android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg7"
-                        android:layout_marginLeft="20dp" android:layout_below="@+id/smallPeg5"
-                        android:layout_height="wrap_content" android:layout_width="wrap_content"
-                        android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg8"
-                        android:layout_below="@+id/smallPeg6" android:layout_toRightOf="@+id/smallPeg7"
-                        android:layout_height="wrap_content" android:layout_width="wrap_content"
-                        android:background="@drawable/smallslot"></ImageView>
 
-                    <ImageView android:id="@+id/peg05" android:layout_height="wrap_content"
-                        android:onClick="select" android:layout_toRightOf="@+id/smallPeg6"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg06"
-                        android:layout_toRightOf="@+id/peg05" android:onClick="select"
-                        android:layout_height="wrap_content" android:background="@drawable/pegslot"
-                        android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg07"
-                        android:layout_toRightOf="@+id/peg06" android:onClick="select"
-                        android:layout_height="wrap_content" android:background="@drawable/pegslot"
-                        android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg08" android:layout_height="wrap_content"
-                        android:onClick="select" android:layout_toRightOf="@+id/peg07"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/confirm02"
-                        android:layout_height="wrap_content" android:onClick="confirm"
-                        android:layout_toRightOf="@+id/peg08" android:layout_width="wrap_content"></ImageView>
-                </RelativeLayout>
-            </TableRow>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/smallPeg5" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/smallPeg5" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/smallPeg6"
+                    android:layout_toRightOf="@+id/smallPeg7" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg05"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/smallPeg6"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg06"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg05"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg07"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg06"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg08"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg07"
+                    android:onClick="select" />
+
+                <ImageView
+                    android:id="@+id/confirm02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg08"
+                    android:onClick="confirm" />
+            </RelativeLayout>
 
             <!-- guess 8 -->
-            <TableRow>
-                <RelativeLayout>
-                    <ImageView android:id="@+id/smallPeg9"
-                        android:layout_marginLeft="20dp" android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg10"
-                        android:layout_toRightOf="@+id/smallPeg9" android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg11"
-                        android:layout_marginLeft="20dp" android:layout_below="@+id/smallPeg9"
-                        android:layout_height="wrap_content" android:layout_width="wrap_content"
-                        android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg12"
-                        android:layout_below="@+id/smallPeg10" android:layout_toRightOf="@+id/smallPeg11"
-                        android:layout_height="wrap_content" android:layout_width="wrap_content"
-                        android:background="@drawable/smallslot"></ImageView>
 
-                    <ImageView android:id="@+id/peg09" android:layout_height="wrap_content"
-                        android:onClick="select" android:layout_toRightOf="@+id/smallPeg10"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg10" android:onClick="select"
-                        android:layout_toRightOf="@+id/peg09" android:layout_height="wrap_content"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg11" android:onClick="select"
-                        android:layout_toRightOf="@+id/peg10" android:layout_height="wrap_content"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg12" android:layout_height="wrap_content"
-                        android:onClick="select" android:layout_toRightOf="@+id/peg11"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/confirm03"
-                        android:layout_height="wrap_content" android:onClick="confirm"
-                        android:layout_toRightOf="@+id/peg12" android:layout_width="wrap_content"></ImageView>
-                </RelativeLayout>
-            </TableRow>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/smallPeg9" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/smallPeg9" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/smallPeg10"
+                    android:layout_toRightOf="@+id/smallPeg11" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg09"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/smallPeg10"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg09"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg10"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg11"
+                    android:onClick="select" />
+
+                <ImageView
+                    android:id="@+id/confirm03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg12"
+                    android:onClick="confirm" />
+            </RelativeLayout>
 
             <!-- guess 7 -->
-            <TableRow>
-                <RelativeLayout>
-                    <ImageView android:id="@+id/smallPeg13"
-                        android:layout_marginLeft="20dp" android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg14"
-                        android:layout_toRightOf="@+id/smallPeg13" android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg15"
-                        android:layout_marginLeft="20dp" android:layout_below="@+id/smallPeg13"
-                        android:layout_height="wrap_content" android:layout_width="wrap_content"
-                        android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg16"
-                        android:layout_below="@+id/smallPeg14" android:layout_toRightOf="@+id/smallPeg15"
-                        android:layout_height="wrap_content" android:layout_width="wrap_content"
-                        android:background="@drawable/smallslot"></ImageView>
 
-                    <ImageView android:id="@+id/peg13" android:layout_height="wrap_content"
-                        android:onClick="select" android:layout_toRightOf="@+id/smallPeg14"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg14" android:onClick="select"
-                        android:layout_toRightOf="@+id/peg13" android:layout_height="wrap_content"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg15" android:onClick="select"
-                        android:layout_toRightOf="@+id/peg14" android:layout_height="wrap_content"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg16" android:layout_height="wrap_content"
-                        android:onClick="select" android:layout_toRightOf="@+id/peg15"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
 
-                    <ImageView android:id="@+id/confirm04"
-                        android:layout_height="wrap_content" android:onClick="confirm"
-                        android:layout_toRightOf="@+id/peg16" android:layout_width="wrap_content"></ImageView>
-                </RelativeLayout>
-            </TableRow>
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/smallPeg13" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/smallPeg13" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/smallPeg14"
+                    android:layout_toRightOf="@+id/smallPeg15" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/smallPeg14"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg13"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg14"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg15"
+                    android:onClick="select" />
+
+                <ImageView
+                    android:id="@+id/confirm04"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg16"
+                    android:onClick="confirm" />
+            </RelativeLayout>
 
             <!-- guess 6 -->
-            <TableRow>
-                <RelativeLayout>
-                    <ImageView android:id="@+id/smallPeg17"
-                        android:layout_marginLeft="20dp" android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg18"
-                        android:layout_toRightOf="@+id/smallPeg17" android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg19"
-                        android:layout_marginLeft="20dp" android:layout_below="@+id/smallPeg17"
-                        android:layout_height="wrap_content" android:layout_width="wrap_content"
-                        android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg20"
-                        android:layout_below="@+id/smallPeg18" android:layout_toRightOf="@+id/smallPeg19"
-                        android:layout_height="wrap_content" android:layout_width="wrap_content"
-                        android:background="@drawable/smallslot"></ImageView>
 
-                    <ImageView android:id="@+id/peg17" android:layout_height="wrap_content"
-                        android:onClick="select" android:layout_toRightOf="@+id/smallPeg18"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg18" android:onClick="select"
-                        android:layout_toRightOf="@+id/peg17" android:layout_height="wrap_content"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg19" android:onClick="select"
-                        android:layout_toRightOf="@+id/peg18" android:layout_height="wrap_content"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg20" android:layout_height="wrap_content"
-                        android:onClick="select" android:layout_toRightOf="@+id/peg19"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/confirm05"
-                        android:layout_height="wrap_content" android:onClick="confirm"
-                        android:layout_toRightOf="@+id/peg20" android:layout_width="wrap_content"></ImageView>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
 
-                </RelativeLayout>
-            </TableRow>
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/smallPeg17" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/smallPeg17" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/smallPeg18"
+                    android:layout_toRightOf="@+id/smallPeg19" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/smallPeg18"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg17"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg18"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg19"
+                    android:onClick="select" />
+
+                <ImageView
+                    android:id="@+id/confirm05"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg20"
+                    android:onClick="confirm" />
+            </RelativeLayout>
 
             <!-- guess 5 -->
-            <TableRow>
-                <RelativeLayout>
-                    <ImageView android:id="@+id/smallPeg21"
-                        android:layout_marginLeft="20dp" android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg22"
-                        android:layout_toRightOf="@+id/smallPeg21" android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg23"
-                        android:layout_marginLeft="20dp" android:layout_below="@+id/smallPeg21"
-                        android:layout_height="wrap_content" android:layout_width="wrap_content"
-                        android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg24"
-                        android:layout_below="@+id/smallPeg22" android:layout_toRightOf="@+id/smallPeg23"
-                        android:layout_height="wrap_content" android:layout_width="wrap_content"
-                        android:background="@drawable/smallslot"></ImageView>
 
-                    <ImageView android:id="@+id/peg21" android:layout_height="wrap_content"
-                        android:onClick="select" android:layout_toRightOf="@+id/smallPeg22"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg22" android:onClick="select"
-                        android:layout_toRightOf="@+id/peg21" android:layout_height="wrap_content"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg23" android:onClick="select"
-                        android:layout_toRightOf="@+id/peg22" android:layout_height="wrap_content"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg24" android:layout_height="wrap_content"
-                        android:onClick="select" android:layout_toRightOf="@+id/peg23"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
 
-                    <ImageView android:id="@+id/confirm06"
-                        android:layout_height="wrap_content" android:onClick="confirm"
-                        android:layout_toRightOf="@+id/peg24" android:layout_width="wrap_content"></ImageView>
-                </RelativeLayout>
-            </TableRow>
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/smallPeg21" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/smallPeg21" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/smallPeg22"
+                    android:layout_toRightOf="@+id/smallPeg23" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/smallPeg22"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg21"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg22"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg23"
+                    android:onClick="select" />
+
+                <ImageView
+                    android:id="@+id/confirm06"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg24"
+                    android:onClick="confirm" />
+            </RelativeLayout>
 
             <!-- guess 4 -->
-            <TableRow>
-                <RelativeLayout>
-                    <ImageView android:id="@+id/smallPeg25"
-                        android:layout_marginLeft="20dp" android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg26"
-                        android:layout_toRightOf="@+id/smallPeg25" android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg27"
-                        android:layout_marginLeft="20dp" android:layout_below="@+id/smallPeg26"
-                        android:layout_height="wrap_content" android:layout_width="wrap_content"
-                        android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg28"
-                        android:layout_below="@+id/smallPeg26" android:layout_toRightOf="@+id/smallPeg27"
-                        android:layout_height="wrap_content" android:layout_width="wrap_content"
-                        android:background="@drawable/smallslot"></ImageView>
 
-                    <ImageView android:id="@+id/peg25" android:layout_height="wrap_content"
-                        android:onClick="select" android:layout_toRightOf="@+id/smallPeg26"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg26" android:onClick="select"
-                        android:layout_toRightOf="@+id/peg25" android:layout_height="wrap_content"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg27" android:onClick="select"
-                        android:layout_toRightOf="@+id/peg26" android:layout_height="wrap_content"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg28" android:layout_height="wrap_content"
-                        android:onClick="select" android:layout_toRightOf="@+id/peg27"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
 
-                    <ImageView android:id="@+id/confirm07"
-                        android:layout_height="wrap_content" android:onClick="confirm"
-                        android:layout_toRightOf="@+id/peg28" android:layout_width="wrap_content"></ImageView>
-                </RelativeLayout>
-            </TableRow>
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/smallPeg25" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/smallPeg26" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/smallPeg26"
+                    android:layout_toRightOf="@+id/smallPeg27" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/smallPeg26"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg25"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg26"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg27"
+                    android:onClick="select" />
+
+                <ImageView
+                    android:id="@+id/confirm07"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg28"
+                    android:onClick="confirm" />
+            </RelativeLayout>
 
             <!-- guess 3 -->
-            <TableRow>
-                <RelativeLayout>
-                    <ImageView android:id="@+id/smallPeg29"
-                        android:layout_marginLeft="20dp" android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg30"
-                        android:layout_toRightOf="@+id/smallPeg29" android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg31"
-                        android:layout_marginLeft="20dp" android:layout_below="@+id/smallPeg29"
-                        android:layout_height="wrap_content" android:layout_width="wrap_content"
-                        android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg32"
-                        android:layout_below="@+id/smallPeg30" android:layout_toRightOf="@+id/smallPeg31"
-                        android:layout_height="wrap_content" android:layout_width="wrap_content"
-                        android:background="@drawable/smallslot"></ImageView>
 
-                    <ImageView android:id="@+id/peg29" android:layout_height="wrap_content"
-                        android:onClick="select" android:layout_toRightOf="@+id/smallPeg30"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg30" android:onClick="select"
-                        android:layout_toRightOf="@+id/peg29" android:layout_height="wrap_content"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg31" android:onClick="select"
-                        android:layout_toRightOf="@+id/peg30" android:layout_height="wrap_content"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg32" android:layout_height="wrap_content"
-                        android:onClick="select" android:layout_toRightOf="@+id/peg31"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/confirm08"
-                        android:layout_height="wrap_content" android:onClick="confirm"
-                        android:layout_toRightOf="@+id/peg32" android:layout_width="wrap_content"></ImageView>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
 
-                </RelativeLayout>
-            </TableRow>
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg29"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/smallPeg29" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg31"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/smallPeg29" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/smallPeg30"
+                    android:layout_toRightOf="@+id/smallPeg31" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg29"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/smallPeg30"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg29"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg31"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg30"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg31"
+                    android:onClick="select" />
+
+                <ImageView
+                    android:id="@+id/confirm08"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg32"
+                    android:onClick="confirm" />
+            </RelativeLayout>
 
             <!-- guess 2 -->
-            <TableRow>
-                <RelativeLayout>
-                    <ImageView android:id="@+id/smallPeg33"
-                        android:layout_marginLeft="20dp" android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg34"
-                        android:layout_toRightOf="@+id/smallPeg33" android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg35"
-                        android:layout_marginLeft="20dp" android:layout_below="@+id/smallPeg33"
-                        android:layout_height="wrap_content" android:layout_width="wrap_content"
-                        android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg36"
-                        android:layout_below="@+id/smallPeg34" android:layout_toRightOf="@+id/smallPeg35"
-                        android:layout_height="wrap_content" android:layout_width="wrap_content"
-                        android:background="@drawable/smallslot"></ImageView>
 
-                    <ImageView android:id="@+id/peg33" android:layout_height="wrap_content"
-                        android:onClick="select" android:layout_toRightOf="@+id/smallPeg34"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg34" android:onClick="select"
-                        android:layout_toRightOf="@+id/peg33" android:layout_height="wrap_content"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg35" android:onClick="select"
-                        android:layout_toRightOf="@+id/peg34" android:layout_height="wrap_content"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg36" android:layout_height="wrap_content"
-                        android:onClick="select" android:layout_toRightOf="@+id/peg35"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
 
-                    <ImageView android:id="@+id/confirm09"
-                        android:layout_height="wrap_content" android:onClick="confirm"
-                        android:layout_toRightOf="@+id/peg36" android:layout_width="wrap_content"></ImageView>
-                </RelativeLayout>
-            </TableRow>
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg34"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/smallPeg33" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg35"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/smallPeg33" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg36"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/smallPeg34"
+                    android:layout_toRightOf="@+id/smallPeg35" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/smallPeg34"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg34"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg33"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg35"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg34"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg36"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg35"
+                    android:onClick="select" />
+
+                <ImageView
+                    android:id="@+id/confirm09"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg36"
+                    android:onClick="confirm" />
+            </RelativeLayout>
 
             <!-- guess 1 -->
-            <TableRow>
-                <RelativeLayout>
-                    <ImageView android:id="@+id/smallPeg37"
-                        android:layout_marginLeft="20dp" android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg38"
-                        android:layout_toRightOf="@+id/smallPeg37" android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg39"
-                        android:layout_marginLeft="20dp" android:layout_below="@+id/smallPeg37"
-                        android:layout_height="wrap_content" android:layout_width="wrap_content"
-                        android:background="@drawable/smallslot"></ImageView>
-                    <ImageView android:id="@+id/smallPeg40"
-                        android:layout_below="@+id/smallPeg38" android:layout_toRightOf="@+id/smallPeg39"
-                        android:layout_height="wrap_content" android:layout_width="wrap_content"
-                        android:background="@drawable/smallslot"></ImageView>
 
-                    <ImageView android:id="@+id/peg37" android:layout_height="wrap_content"
-                        android:onClick="select" android:layout_toRightOf="@+id/smallPeg38"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg38" android:onClick="select"
-                        android:layout_toRightOf="@+id/peg37" android:layout_height="wrap_content"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg39" android:onClick="select"
-                        android:layout_toRightOf="@+id/peg38" android:layout_height="wrap_content"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
-                    <ImageView android:id="@+id/peg40" android:layout_height="wrap_content"
-                        android:onClick="select" android:layout_toRightOf="@+id/peg39"
-                        android:background="@drawable/pegslot" android:layout_width="wrap_content"></ImageView>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
 
-                    <ImageView android:id="@+id/confirm10"
-                        android:layout_height="wrap_content" android:onClick="confirm"
-                        android:src="@drawable/row" android:layout_toRightOf="@+id/peg40"
-                        android:layout_width="wrap_content"></ImageView>
-                </RelativeLayout>
-            </TableRow>
-        </TableLayout>
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg37"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg38"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/smallPeg37" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg39"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/smallPeg37" />
+
+                <taxomania.games.mastermind.SmallPegSlot
+                    android:id="@+id/smallPeg40"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/smallPeg38"
+                    android:layout_toRightOf="@+id/smallPeg39" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg37"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/smallPeg38"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg38"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg37"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg39"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg38"
+                    android:onClick="select" />
+
+                <taxomania.games.mastermind.PegSlot
+                    android:id="@+id/peg40"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg39"
+                    android:onClick="select" />
+
+                <ImageView
+                    android:id="@+id/confirm10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/peg40"
+                    android:onClick="confirm"
+                    android:src="@drawable/row" />
+            </RelativeLayout>
+        </LinearLayout>
     </ScrollView>
+
     <!-- selection of pegs -->
-    <ImageView android:src="@drawable/bluepeg" android:id="@+id/bluePeg"
-        android:onClick="onBlue" android:layout_height="wrap_content"
-        android:layout_width="wrap_content" android:layout_alignParentBottom="true"></ImageView>
-    <ImageView android:src="@drawable/greenpeg" android:id="@+id/greenPeg"
-        android:onClick="onGreen" android:layout_height="wrap_content"
-        android:layout_width="wrap_content" android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/bluePeg"></ImageView>
-    <ImageView android:src="@drawable/redpeg" android:id="@+id/redPeg"
-        android:onClick="onRed" android:layout_height="wrap_content"
-        android:layout_width="wrap_content" android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/greenPeg"></ImageView>
-    <ImageView android:src="@drawable/whitepeg" android:id="@+id/whitePeg"
-        android:onClick="onWhite" android:layout_height="wrap_content"
-        android:layout_width="wrap_content" android:layout_toRightOf="@+id/redPeg"
-        android:layout_alignParentBottom="true"></ImageView>
-    <ImageView android:src="@drawable/yellowpeg" android:id="@+id/yellowPeg"
-        android:layout_toRightOf="@+id/whitePeg" android:layout_height="wrap_content"
-        android:layout_width="wrap_content" android:onClick="onYellow"
-        android:layout_alignParentBottom="true"></ImageView>
-    <ImageView android:src="@drawable/purplepeg" android:id="@+id/purplePeg"
-        android:layout_toRightOf="@+id/yellowPeg" android:layout_height="wrap_content"
-        android:layout_width="wrap_content" android:onClick="onPurple"
-        android:layout_alignParentBottom="true"></ImageView>
-    <Chronometer android:layout_height="wrap_content" android:id="@+id/timer"
-        android:layout_width="wrap_content" android:text="" android:padding="2dp"
-        android:visibility="invisible" android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"></Chronometer>
+
+    <LinearLayout
+        android:id="@id/selection"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/bluePeg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bluepeg" />
+
+        <ImageView
+            android:id="@+id/greenPeg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/greenpeg" />
+
+        <ImageView
+            android:id="@+id/redPeg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/redpeg" />
+
+        <ImageView
+            android:id="@+id/whitePeg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/whitepeg" />
+
+        <ImageView
+            android:id="@+id/yellowPeg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/yellowpeg" />
+
+        <ImageView
+            android:id="@+id/purplePeg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/purplepeg" />
+    </LinearLayout>
 
 </RelativeLayout>

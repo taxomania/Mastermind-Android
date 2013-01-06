@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/bg" android:layout_width="fill_parent"
-    android:layout_height="fill_parent" android:padding="2dp">
-    <TableLayout android:id="@+id/chooseBoard"
-        android:stretchColumns="0,1" android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-        <TableRow>
-            <TextView android:text="High Scores" android:textColor="@color/white" android:textStyle="bold"
-                android:textSize="18dp" android:padding="14dp" android:layout_gravity="center" />
-        </TableRow>
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical" >
 
-        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_gravity="center"
-            android:layout_width="fill_parent" android:layout_height="fill_parent">
-            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/highScoreTable" android:layout_width="fill_parent"
-                android:layout_height="fill_parent" android:stretchColumns="0,1,2,3">
-            </TableLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="14dp"
+        android:text="High Scores"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:textStyle="bold" />
 
-        </ScrollView>
-    </TableLayout>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="5dp"
+        android:paddingLeft="10dp" >
+
+        <TableLayout
+            android:id="@+id/highScoreTable"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="0,1,2,3" >
+        </TableLayout>
+    </ScrollView>
+
 </LinearLayout>
-

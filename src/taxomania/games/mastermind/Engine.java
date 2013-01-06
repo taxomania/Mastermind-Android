@@ -5,23 +5,28 @@ package taxomania.games.mastermind;
  * @author Tariq Patel
  *
  */
-public class Engine {
-    protected static final int TOTAL_NO_PEGS = 6;
+final class Engine {
+    static final int TOTAL_NO_PEGS = 6;
     private static final int COMBO_LENGTH = 4;
-    private final Pair[] mCombination = new Pair[COMBO_LENGTH];
+    private final Peg[] mCombination = new Peg[COMBO_LENGTH];
 
-    public Engine() {
+    Engine() {
         for (int i = 0; i < mCombination.length; i++)
-            mCombination[i] = new Pair(Mastermind.sPegs[(int) ((TOTAL_NO_PEGS) * Math.random())]);
+            mCombination[i] = new Peg(Mastermind.sPegs[(int) ((TOTAL_NO_PEGS) * Math.random())]);
     } // Engine()
 
-    public void resetStates() {
-        for (int i = 0; i < mCombination.length; i++)
+    Peg[] getCombination() {
+        return mCombination;
+    } // getCombination()
+
+    void resetStates() {
+        for (int i = 0; i < mCombination.length; i++) {
             mCombination[i].setReady(true);
+        } // for
     } // resetStates()
 
     // Check the peg is the right colour and in the right position
-    public boolean checkPos(final int guess, final int pos) {
+    boolean checkPos(final int guess, final int pos) {
         if (mCombination[pos].getReady()) {
             if (guess == mCombination[pos].getPeg()) {
                 mCombination[pos].setReady(false);
@@ -32,7 +37,7 @@ public class Engine {
     } // checkPos(int, int)
 
     // Check the peg is the right colour but in the wrong position
-    public boolean checkPeg(final int guess) {
+    boolean checkPeg(final int guess) {
         for (int i = 0; i < mCombination.length; i++) {
             if (mCombination[i].getReady()) {
                 if (guess == mCombination[i].getPeg()) {
@@ -43,4 +48,4 @@ public class Engine {
         } // for
         return false;
     } // checkPeg(int)
-} // Engine
+} // class Engine

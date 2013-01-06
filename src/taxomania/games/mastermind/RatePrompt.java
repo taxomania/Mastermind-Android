@@ -17,7 +17,7 @@ import android.widget.Button;
  *  A class to Prompt the user to rate the app after 10 launches.
  *  It displays a dialog with options to rate now, rate later or to never rate the app.
  */
-public class RatePrompt {
+public final class RatePrompt {
     private static final String TAG = RatePrompt.class.getSimpleName();
     private static final String MARKET_URI = "market://details?id=";
     private static final String WEB_URI = "https://market.android.com/details?id=";
@@ -39,7 +39,7 @@ public class RatePrompt {
     private static void cancel() {
         sLaunches = 0;
         sDialog.dismiss();
-    } // cancel
+    } // cancel()
 
     private static void prompt(final Context context) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -76,14 +76,14 @@ public class RatePrompt {
                 } // catch
                 sDoesPrompt = false;
                 sDialog.dismiss();
-            } // onClick
+            } // onClick(View)
         });
 
         ((Button) v.findViewById(R.id.rateLater)).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
                 cancel();
-            } // onClick
+            } // onClick(View)
         });
 
         ((Button) v.findViewById(R.id.rateNever)).setOnClickListener(new OnClickListener() {
@@ -91,9 +91,9 @@ public class RatePrompt {
             public void onClick(final View v) {
                 sDoesPrompt = false;
                 sDialog.dismiss();
-            } // onClick
+            } // onClick(View)
         });
 
         return v;
     } // getDialogLayout(Context)
-} // RatePrompt
+} // class RatePrompt

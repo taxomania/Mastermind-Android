@@ -14,28 +14,23 @@ import android.database.sqlite.SQLiteStatement;
 import android.provider.BaseColumns;
 import android.util.Log;
 
-public class DataHelper {
-    public static final class Scores implements BaseColumns {
+final class DataHelper {
+    static final class Scores implements BaseColumns {
         private static final String TABLE_NAME = "tbl_scores";
 
-        public static final String NAME = "name";
-        public static final String TIME = "time";
-        public static final String GUESSES = "guesses";
+        static final String NAME = "name";
+        static final String TIME = "time";
+        static final String GUESSES = "guesses";
 
         private Scores() {
-            super();
             throw new AssertionError();
         } // Scores()
-
-    } // Scores
-
-    private final Context mContext;
+    } // class Scores
 
     private volatile SQLiteDatabase mDb = null;
-
     private static DataHelper sDataHelper = null;
 
-    public static synchronized DataHelper getInstance(final Context context) {
+    static synchronized DataHelper getInstance(final Context context) {
         if (sDataHelper == null) {
             sDataHelper = new DataHelper(context);
         } // if
@@ -43,27 +38,26 @@ public class DataHelper {
     } // getInstance(Context)
 
     private DataHelper(final Context context) {
-        mContext = context;
-        mDb = new OpenHelper(mContext).getWritableDatabase();
+        mDb = new OpenHelper(context.getApplicationContext()).getWritableDatabase();
     } // DataHelper(Context)
 
-    public int getCount() {
+    int getCount() {
         return (int) count();
     } // getCount()
 
-    public long insert(final String name, final int time, final int guesses) {
+    long insert(final String name, final int time, final int guesses) {
         final ContentValues cv = new ContentValues(3);
-        cv.put("name", name);
-        cv.put("time", time);
-        cv.put("guesses", guesses);
+        cv.put(Scores.NAME, name);
+        cv.put(Scores.TIME, time);
+        cv.put(Scores.GUESSES, guesses);
         return mDb.insert(Scores.TABLE_NAME, null, cv);
     } // insert(String, int, int)
 
-    public void deleteAll() {
+    void deleteAll() {
         mDb.delete(Scores.TABLE_NAME, null, null);
     } // deleteAll()
 
-    public List<Map<String, Object>> selectAll() {
+    List<Map<String, Object>> selectAll() {
         final List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         final Cursor cursor = mDb.query(Scores.TABLE_NAME, new String[] { Scores.NAME, Scores.TIME,
                 Scores.GUESSES }, null, null, null, null, Scores.TIME + " asc, " + Scores.GUESSES
@@ -81,9 +75,9 @@ public class DataHelper {
             cursor.close();
         } // if
         return list;
-    } // selectAll()
+    } // selectAll(List<Map<String, Object>>)
 
-    public List<Integer> selectAllTimes() {
+    List<Integer> selectAllTimes() {
         final List<Integer> list = new ArrayList<Integer>();
         final Cursor cursor = mDb.query(Scores.TABLE_NAME, new String[] { Scores.TIME }, null,
                 null, null, null, Scores.TIME + " asc, " + Scores.GUESSES + " asc");
@@ -96,7 +90,7 @@ public class DataHelper {
             cursor.close();
         } // if
         return list;
-    } // selectAllTimes()
+    } // selectAllTimes(List<Integer>)
 
     private long count() {
         final String countStatement = "SELECT count(*) from " + Scores.TABLE_NAME;
@@ -104,7 +98,7 @@ public class DataHelper {
         return s.simpleQueryForLong();
     } // count()
 
-    private static class OpenHelper extends SQLiteOpenHelper {
+    private static final class OpenHelper extends SQLiteOpenHelper {
         private static final String DATABASE_NAME = "mastermind_free.db";
         private static final int DATABASE_VERSION = 2;
 
@@ -113,17 +107,17 @@ public class DataHelper {
         } // OpenHelper(Context)
 
         @Override
-        public void onCreate(SQLiteDatabase db) {
+        public void onCreate(final SQLiteDatabase db) {
             db.execSQL("CREATE TABLE " + Scores.TABLE_NAME + " (" + Scores._ID
                     + " INTEGER PRIMARY KEY AUTOINCREMENT, " + Scores.NAME + " TEXT, "
                     + Scores.TIME + " INTEGER, " + Scores.GUESSES + " INTEGER)");
         } // onCreate(SQLiteDatabase)
 
         @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        public void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
             Log.w("Example", "Upgrading database, this will drop tables and recreate.");
             db.execSQL("DROP TABLE IF EXISTS " + Scores.TABLE_NAME);
             onCreate(db);
         } // onUpgrade(SQLiteDatabase, int, int)
-    } // OpenHelper
-} // DataHelper
+    } // class OpenHelper
+} // class DataHelper

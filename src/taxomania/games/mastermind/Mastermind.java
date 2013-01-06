@@ -12,30 +12,31 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
 /**
- *
+ * 
  * @author Tariq Patel
- *
+ * 
  */
 public class Mastermind extends Activity {
     // Constant declarations
-    protected static final int BLUE = 0, GREEN = 1, RED = 2, WHITE = 3, YELLOW = 4, PURPLE = 5,
+    static final int BLUE = 0, GREEN = 1, RED = 2, WHITE = 3, YELLOW = 4, PURPLE = 5,
             TOTAL_PEG_SLOTS = 40, MAX_PEGS = 4, MAX_GUESSES = 10;
-    protected static final int[] sPegs = { R.drawable.bluepeg, R.drawable.greenpeg,
-            R.drawable.redpeg, R.drawable.whitepeg, R.drawable.yellowpeg, R.drawable.purplepeg };
+    static final int[] sPegs = { R.drawable.bluepeg, R.drawable.greenpeg, R.drawable.redpeg,
+            R.drawable.whitepeg, R.drawable.yellowpeg, R.drawable.purplepeg };
     // slotPosition[] maps peg slots to view IDs
     protected static final int[] sSlotPosition = new int[TOTAL_PEG_SLOTS];
     protected static final int[] sSmallSlotPosition = new int[TOTAL_PEG_SLOTS];
     protected static final int[][] pegSlots = new int[MAX_GUESSES][MAX_PEGS];
     protected static final int[][] sSmallPegSlots = new int[MAX_GUESSES][MAX_PEGS];
 
-    protected Engine mGame;
-    protected int mGuess = 0;
-    protected Resources mResources;
+    Engine mGame;
+    int mGuess = 0;
+    Resources mResources;
     // state[] shows which colour peg has been selected
-    protected boolean[] mState = new boolean[Engine.TOTAL_NO_PEGS];
+    boolean[] mState = new boolean[Engine.TOTAL_NO_PEGS];
 
     // Map the ImageView id's to an array index for simplicity when referencing later
     // Very inefficient, needs to be fixed.
@@ -123,12 +124,12 @@ public class Mastermind extends Activity {
         sSmallSlotPosition[38] = R.id.smallPeg2;
         sSmallSlotPosition[39] = R.id.smallPeg1;
 
-        map2(sSlotPosition, pegSlots);
-        map2(sSmallSlotPosition, sSmallPegSlots);
+        map(sSlotPosition, pegSlots);
+        map(sSmallSlotPosition, sSmallPegSlots);
     } // static
 
     // Map the slotPositions to an index for each row on the board
-    protected static void map2(final int[] array, final int[][] dArray) {
+    private static void map(final int[] array, final int[][] dArray) {
         int k = 0;
         for (int i = 0; i < dArray.length; i++) {
             for (int j = 0; j < dArray[i].length; j++) {
@@ -136,18 +137,111 @@ public class Mastermind extends Activity {
                 k++;
             } // for
         } // for
-    } // map2(int[], int[][])
+    } // map(int[], int[][])
+
+    private ImageView bluePeg;
+    private ImageView greenPeg;
+    private ImageView redPeg;
+    private ImageView whitePeg;
+    private ImageView yellowPeg;
+    private ImageView purplePeg;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mastermind);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         mResources = getResources();
         // Initialise the state array
-        for (int i = 0; i < mState.length; i++)
+        for (int i = 0; i < mState.length; i++) {
             mState[i] = false;
+        } // for
+
+        bluePeg = (ImageView) findViewById(R.id.bluePeg);
+        bluePeg.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                if (!mState[BLUE]) {
+                    checkState();
+                    ((ImageView) v).setImageResource(R.drawable.bluepicked);
+                    mState[BLUE] = true;
+                } else {
+                    ((ImageView) v).setImageResource(R.drawable.bluepeg);
+                    mState[BLUE] = false;
+                } // else
+            } // onClick(View)
+        });
+        greenPeg = (ImageView) findViewById(R.id.greenPeg);
+        greenPeg.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                if (!mState[GREEN]) {
+                    checkState();
+                    mState[GREEN] = true;
+                    ((ImageView) v).setImageResource(R.drawable.greenpicked);
+                } else {
+                    ((ImageView) v).setImageResource(R.drawable.greenpeg);
+                    mState[GREEN] = false;
+                } // else
+            } // onClick(View)
+        });
+        redPeg = (ImageView) findViewById(R.id.redPeg);
+        redPeg.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                if (!mState[RED]) {
+                    checkState();
+                    mState[RED] = true;
+                    ((ImageView) v).setImageResource(R.drawable.redpicked);
+                } else {
+                    ((ImageView) v).setImageResource(R.drawable.redpeg);
+                    mState[RED] = false;
+                } // else
+            } // onClick(View)
+        });
+        whitePeg = (ImageView) findViewById(R.id.whitePeg);
+        whitePeg.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                if (!mState[WHITE]) {
+                    checkState();
+                    mState[WHITE] = true;
+                    ((ImageView) v).setImageResource(R.drawable.whitepicked);
+                } else {
+                    mState[WHITE] = false;
+                    ((ImageView) v).setImageResource(R.drawable.whitepeg);
+                } // else
+            } // onClick(View)
+        });
+        yellowPeg = (ImageView) findViewById(R.id.yellowPeg);
+        yellowPeg.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                if (!mState[YELLOW]) {
+                    checkState();
+                    ((ImageView) v).setImageResource(R.drawable.yellowpicked);
+                    mState[YELLOW] = true;
+                } else {
+                    mState[YELLOW] = false;
+                    ((ImageView) v).setImageResource(R.drawable.yellowpeg);
+                } // else
+            } // onClick(View)
+        });
+        purplePeg = (ImageView) findViewById(R.id.purplePeg);
+        purplePeg.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                if (!mState[PURPLE]) {
+                    checkState();
+                    mState[PURPLE] = true;
+                    ((ImageView) v).setImageResource(R.drawable.purplepicked);
+                } else {
+                    ((ImageView) v).setImageResource(R.drawable.purplepeg);
+                    mState[PURPLE] = false;
+                } // else
+            } // onClick(View)
+        });
 
         // New game, create a new combination
         mGame = new Engine();
@@ -180,51 +274,27 @@ public class Mastermind extends Activity {
         } // switch
     } // onOptionsItemSelected(MenuItem)
 
-    public void setGame(final Engine game) {
-        mGame = game;
-    } // setGame(Engine)
-
-    public Engine getGame() {
-        return mGame;
-    } // getGame()
-
-    public void setState(final boolean[] state) {
-        mState = state;
-    } // setState(boolean[])
-
-    public boolean[] getState() {
-        return mState;
-    } // getState()
-
-    public void setGuess(final int guess) {
-        mGuess = guess;
-    } // setGuess(int)
-
-    public int getGuess() {
-        return mGuess;
-    } // getGuess()
-
-    protected void checkState() {
+    private void checkState() {
         for (int i = 0; i < mState.length; i++)
             if (mState[i]) {
                 switch (i) {
                     case BLUE:
-                        onBlue(findViewById(R.id.bluePeg));
+                        bluePeg.performClick();
                         break;
                     case GREEN:
-                        onGreen(findViewById(R.id.greenPeg));
+                        greenPeg.performClick();
                         break;
                     case RED:
-                        onRed(findViewById(R.id.redPeg));
+                        redPeg.performClick();
                         break;
                     case PURPLE:
-                        onPurple(findViewById(R.id.purplePeg));
+                        purplePeg.performClick();
                         break;
                     case WHITE:
-                        onWhite(findViewById(R.id.whitePeg));
+                        whitePeg.performClick();
                         break;
                     case YELLOW:
-                        onYellow(findViewById(R.id.yellowPeg));
+                        yellowPeg.performClick();
                         break;
                     default:
                         break;
@@ -233,80 +303,19 @@ public class Mastermind extends Activity {
             } // if
     } // checkState()
 
-    public void onBlue(final View view) {
-        if (!mState[BLUE]) {
-            checkState();
-            ((ImageView) view).setImageResource(R.drawable.bluepicked);
-            mState[BLUE] = true;
-        } else {
-            ((ImageView) view).setImageResource(R.drawable.bluepeg);
-            mState[BLUE] = false;
-        } // else
-    } // onBlue(View)
-
-    public void onGreen(final View view) {
-        if (!mState[GREEN]) {
-            checkState();
-            mState[GREEN] = true;
-            ((ImageView) view).setImageResource(R.drawable.greenpicked);
-        } else {
-            ((ImageView) view).setImageResource(R.drawable.greenpeg);
-            mState[GREEN] = false;
-        } // else
-    } // onGreen(View)
-
-    public void onPurple(final View view) {
-        if (!mState[PURPLE]) {
-            checkState();
-            mState[PURPLE] = true;
-            ((ImageView) view).setImageResource(R.drawable.purplepicked);
-        } else {
-            ((ImageView) view).setImageResource(R.drawable.purplepeg);
-            mState[PURPLE] = false;
-        } // else
-    } // onPurple(View)
-
-    public void onRed(final View view) {
-        if (!mState[RED]) {
-            checkState();
-            mState[RED] = true;
-            ((ImageView) view).setImageResource(R.drawable.redpicked);
-        } else {
-            ((ImageView) view).setImageResource(R.drawable.redpeg);
-            mState[RED] = false;
-        } // else
-    } // onRed(View)
-
-    public void onWhite(final View view) {
-        if (!mState[WHITE]) {
-            checkState();
-            mState[WHITE] = true;
-            ((ImageView) view).setImageResource(R.drawable.whitepicked);
-        } else {
-            mState[WHITE] = false;
-            ((ImageView) view).setImageResource(R.drawable.whitepeg);
-        } // else
-    } // onWhite(View)
-
-    public void onYellow(final View view) {
-        if (!mState[YELLOW]) {
-            checkState();
-            ((ImageView) view).setImageResource(R.drawable.yellowpicked);
-            mState[YELLOW] = true;
-        } else {
-            mState[YELLOW] = false;
-            ((ImageView) view).setImageResource(R.drawable.yellowpeg);
-        } // else
-    } // onYellow(View)
-
-    protected boolean checkGuess(final int viewID) {
-        for (int i = 0; i < pegSlots[mGuess].length; i++) {
-            if (pegSlots[mGuess][i] == viewID) { return true; } // if
-        } // for
-        return false;
+    private boolean checkGuess(final int viewID) {
+        try {
+            for (int i = 0; i < pegSlots[mGuess].length; i++) {
+                if (pegSlots[mGuess][i] == viewID) { return true; } // if
+            } // for
+            return false;
+        } catch (final Exception e) {
+            e.printStackTrace();
+            return false;
+        } // catch
     } // checkGuess(int)
 
-    protected void checkPegs() {
+    private void checkPegs() {
         boolean check = true;
         ImageView view = null;
         switch (mGuess) {
@@ -411,8 +420,8 @@ public class Mastermind extends Activity {
         } // else
     } // checkPegs()
 
-    public void select(final View view) {
-        if (!checkGuess(view.getId())) return;
+    public final void select(final View view) {
+        if (finished || !checkGuess(view.getId())) return;
         for (int i = 0; i < mState.length; i++) {
             if (mState[i]) {
                 switch (i) {
@@ -420,37 +429,37 @@ public class Mastermind extends Activity {
                         ((ImageView) view).setImageDrawable(mResources
                                 .getDrawable(R.drawable.bluepeg));
                         view.setTag(R.drawable.bluepeg);
-                        onBlue(findViewById(R.id.bluePeg));
+                        bluePeg.performClick();
                         break;
                     case RED:
                         ((ImageView) view).setImageDrawable(mResources
                                 .getDrawable(R.drawable.redpeg));
                         view.setTag(R.drawable.redpeg);
-                        onRed(findViewById(R.id.redPeg));
+                        redPeg.performClick();
                         break;
                     case WHITE:
                         ((ImageView) view).setImageDrawable(mResources
                                 .getDrawable(R.drawable.whitepeg));
                         view.setTag(R.drawable.whitepeg);
-                        onWhite(findViewById(R.id.whitePeg));
+                        whitePeg.performClick();
                         break;
                     case YELLOW:
                         ((ImageView) view).setImageDrawable(mResources
                                 .getDrawable(R.drawable.yellowpeg));
                         view.setTag(R.drawable.yellowpeg);
-                        onYellow(findViewById(R.id.yellowPeg));
+                        yellowPeg.performClick();
                         break;
                     case GREEN:
                         ((ImageView) view).setImageDrawable(mResources
                                 .getDrawable(R.drawable.greenpeg));
                         view.setTag(R.drawable.greenpeg);
-                        onGreen(findViewById(R.id.greenPeg));
+                        greenPeg.performClick();
                         break;
                     case PURPLE:
                         ((ImageView) view).setImageDrawable(mResources
                                 .getDrawable(R.drawable.purplepeg));
                         view.setTag(R.drawable.purplepeg);
-                        onPurple(findViewById(R.id.purplePeg));
+                        purplePeg.performClick();
                         break;
                     default:
                         break;
@@ -464,7 +473,7 @@ public class Mastermind extends Activity {
         checkPegs();
     } // select(View)
 
-    protected int[] parseAttempt(int[] tags) {
+    private int[] parseAttempt(int[] tags) {
         final int[] attempt = new int[MAX_PEGS];
         for (int i = 0; i < MAX_PEGS; i++) {
             if (tags[i] == sPegs[0]) {
@@ -484,7 +493,7 @@ public class Mastermind extends Activity {
         return attempt;
     }// parseAttempt(int[])
 
-    protected int[] getTags() {
+    private int[] getTags() {
         final int[] tags = new int[MAX_PEGS];
         for (int i = 0; i < MAX_PEGS; i++) {
             tags[i] = (Integer) findViewById(pegSlots[mGuess][i]).getTag();
@@ -495,7 +504,7 @@ public class Mastermind extends Activity {
     private static final int CORRECT_COLOUR_POSITION = 2;
     private static final int CORRECT_COLOUR_WRONG_POSITION = 1;
 
-    protected boolean parseResponse(final int[] resp) {
+    private final boolean parseResponse(final int[] resp) {
         Arrays.sort(resp);
         for (int i = 0; i < MAX_PEGS; i++) {
             if (resp[i] == CORRECT_COLOUR_POSITION) {
@@ -508,14 +517,10 @@ public class Mastermind extends Activity {
         } // for
           // Sorted in ascending order, therefore if first element is correct peg
           // colour and position, all are correct
-        if (resp[0] == CORRECT_COLOUR_POSITION) {
-            return true;
-        } else {
-            return false;
-        } // else
+        return resp[0] == CORRECT_COLOUR_POSITION;
     } // parseResponse(int)
 
-    protected int[] makeResponse(final boolean[] pos, final boolean[] col) {
+    private int[] makeResponse(final boolean[] pos, final boolean[] col) {
         final int[] resp = new int[MAX_PEGS];
         for (int i = 0; i < MAX_PEGS; i++) {
             // If in right position, return 2
@@ -558,16 +563,20 @@ public class Mastermind extends Activity {
         // If the attempt is correct, end the game
         if (correct) {
             endGame();
+            finished = true;
         } else {
             // Lose
             if (mGuess == MAX_GUESSES) {
                 loseGame();
+                finished = true;
             } else {
                 checkPegs();
                 mGame.resetStates();
             } // else
         } // else
     } // confirm(View)
+
+    private boolean finished;
 
     protected void loseGame() {
         final Intent again = new Intent(this, this.getClass());
@@ -588,14 +597,13 @@ public class Mastermind extends Activity {
                         dialog.dismiss();
                     } // onClick(DialogInterface, int)
                 });
-        final AlertDialog alert = builder.create();
-        alert.show();
+        builder.create().show();
     } // loseGame()
 
     protected void endGame() {
         final Intent again = new Intent(this, Mastermind.class);
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Congratulations! You cracked the code in " + mGuess + " attempts!")
+        new AlertDialog.Builder(this)
+                .setMessage("Congratulations! You cracked the code in " + mGuess + " attempts!")
                 .setCancelable(true)
                 .setNeutralButton("Start Again", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
@@ -611,8 +619,6 @@ public class Mastermind extends Activity {
                     public void onClick(final DialogInterface dialog, final int which) {
                         dialog.dismiss();
                     } // onClick(DialogInterface, int)
-                });
-        final AlertDialog alert = builder.create();
-        alert.show();
+                }).create().show();
     } // endGame()
 } // class Mastermind

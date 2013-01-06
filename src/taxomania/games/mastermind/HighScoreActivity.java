@@ -15,11 +15,11 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-public class HighScoreActivity extends Activity {
+public final class HighScoreActivity extends Activity {
     private TableLayout mHighScoreTable;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.high_score_layout);
         mHighScoreTable = (TableLayout) findViewById(R.id.highScoreTable);
@@ -86,12 +86,11 @@ public class HighScoreActivity extends Activity {
         } // for each score
     } // printScores(List<Map<String,Object>>)
 
-    // This method can be made public static for reusability
-    private String getTimeString(final int time) {
+    private static String getTimeString(final int time) {
         final int minutes = time / 60;
         final int seconds = time % 60;
-        final String secs = (seconds < 10) ? ("0" + seconds) : ((Integer) seconds).toString();
-        final String mins = (minutes < 10) ? ("0" + minutes) : ((Integer) minutes).toString();
+        final String secs = (seconds < 10) ? ("0" + seconds) : Integer.toString(seconds);
+        final String mins = (minutes < 10) ? ("0" + minutes) : Integer.toString(minutes);
         return mins + ":" + secs;
     } // getTimeString(int)
 
@@ -115,7 +114,7 @@ public class HighScoreActivity extends Activity {
         protected void onPostExecute(final List<Map<String, Object>> scores) {
             printScores(scores);
         } // onPostExecute(List<Map<String,Object>>)
-    } // PrintHighScores
+    } // class PrintHighScores
 
     private static final int MENU_RESET = Menu.FIRST;
 
@@ -136,5 +135,4 @@ public class HighScoreActivity extends Activity {
                 return super.onOptionsItemSelected(item);
         } // switch
     } // onOptionsItemSelected(MenuItem)
-
 } // class HighScoreActivity

@@ -1,16 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
-    <TextView android:text="@string/rate" android:textSize="15sp"
-        android:textColor="@color/white" android:layout_width="wrap_content"
-        android:gravity="center_horizontal" android:padding="5dip"
-        android:layout_height="wrap_content" />
-    <Button android:id="@+id/rateOk" android:text="Rate Mastermind"
-        android:layout_height="wrap_content" android:layout_width="fill_parent" />
-    <Button android:id="@+id/rateLater" android:text="Remind Me Later"
-        android:layout_height="wrap_content" android:layout_width="fill_parent" />
-    <Button android:id="@+id/rateNever" android:text="No, Thanks"
-        android:layout_marginTop="10dip" android:layout_height="wrap_content"
-        android:layout_width="fill_parent" />
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="5dip"
+        android:text="@string/rate"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/rateOk"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Rate Mastermind" />
+
+    <Button
+        android:id="@+id/rateLater"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Remind Me Later" />
+
+    <Button
+        android:id="@+id/rateNever"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:text="No, Thanks" />
+
 </LinearLayout>

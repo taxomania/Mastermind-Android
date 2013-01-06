@@ -2,15 +2,16 @@ package taxomania.games.mastermind;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.widget.TextView;
 
-public class Instructions extends Activity {
+public final class Instructions extends Activity {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final TextView v = new TextView(this);
         setContentView(v);
@@ -22,12 +23,13 @@ public class Instructions extends Activity {
                 + "the four pegs is the correct colour and in the correct position.\n\nThe small "
                 + "white peg means one of the four pegs is the correct colour but is in "
                 + "the wrong position.");
-        final DisplayMetrics dm = getResources().getDisplayMetrics();
+        final Resources res = getResources();
+        final DisplayMetrics dm = res.getDisplayMetrics();
         final float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, dm);
         v.setTextSize(px);
         final int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, dm);
         v.setPadding(padding, padding, padding, padding);
         v.setTextColor(Color.WHITE);
-        v.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg));
+        v.setBackgroundDrawable(res.getDrawable(R.drawable.bg));
     } // onCreate(Bundle)
-} // Instructions
+} // class Instructions

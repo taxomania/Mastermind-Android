@@ -22,7 +22,7 @@ import android.widget.Chronometer.OnChronometerTickListener;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class TimedMastermind extends Mastermind {
+public final class TimedMastermind extends Mastermind {
     private Chronometer mTimer;
     private boolean mResume = false, mStopped = false;
     private int mTime;
@@ -32,7 +32,7 @@ public class TimedMastermind extends Mastermind {
     private AlertDialog mPauseAlert;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         createPauseAlert();
@@ -69,7 +69,7 @@ public class TimedMastermind extends Mastermind {
                 SensorManager.SENSOR_DELAY_UI);
 
         mSensorListener.setOnShakeListener(new ShakeEventListener.OnShakeListener() {
-
+            @Override
             public void onShake() {
                 pauseGame();
             } // onShake()
@@ -147,18 +147,20 @@ public class TimedMastermind extends Mastermind {
         @Override
         protected Boolean doInBackground(final Integer... time) {
             final DataHelper dh = DataHelper.getInstance(TimedMastermind.this);
-            if (dh.getCount() < 7) return true;
+            if (dh.getCount() < 7) { return Boolean.TRUE; }
             final List<Integer> list = dh.selectAllTimes();
             final int last = list.get(list.size() - 1);
-            if (time[0] < last) return true;
-            return false;
+            if (time[0] < last) { return Boolean.TRUE; }
+            return Boolean.FALSE;
         } // doInBackground(Integer...)
 
         @Override
         protected void onPostExecute(final Boolean newScore) {
-            if (newScore) enterName();
+            if (newScore) {
+                enterName();
+            } // if
         } // onPostExecute(Boolean)
-    } // CheckIfHighScore
+    } // class CheckIfHighScore
 
     private final class AddLocalScore extends AsyncTask<Object, Void, Long> {
         @Override
@@ -194,8 +196,7 @@ public class TimedMastermind extends Mastermind {
                         imm.hideSoftInputFromWindow(userName.getWindowToken(), 0);
                     } // onClick(DialogInterface, int)
                 });
-        final AlertDialog alert = builder.create();
-        alert.show();
+        builder.create().show();
     } // enterName()
 
     @Override
@@ -229,9 +230,7 @@ public class TimedMastermind extends Mastermind {
                     public void onClick(final DialogInterface dialog, final int id) {
                         finish();
                     }
-                });
-        final AlertDialog alert = builder.create();
-        alert.show();
+                }).create().show();
     } // showEndAlert(String)
 
     @Override
@@ -267,4 +266,4 @@ public class TimedMastermind extends Mastermind {
         } // switch
     } // onOptionsItemSelected(MenuItem)
 
-} // TimedMastermind
+} // class TimedMastermind

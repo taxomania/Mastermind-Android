@@ -12,19 +12,18 @@ import android.util.Log;
 import android.view.View;
 
 /**
- *
+ * 
  * @author Tariq Patel
- *
+ * 
  */
 
-public class MainMenu extends Activity {
+public final class MainMenu extends Activity {
     private static final String TAG = MainMenu.class.getSimpleName();
     private static final String MARKET_URI = "market://details?id=taxomania.games.mastermindpro";
-    private static final String WEB_URI =
-            "https://market.android.com/details?id=taxomania.games.mastermindpro";
+    private static final String WEB_URI = "https://market.android.com/details?id=taxomania.games.mastermindpro";
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -32,34 +31,33 @@ public class MainMenu extends Activity {
     } // onCreate(Bundle)
 
     private void newGameDialog() {
-        final Intent classic = new Intent(this, Mastermind.class);
-        final Intent timed = new Intent(this, TimedMastermind.class);
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Select game mode").setCancelable(true)
+        new AlertDialog.Builder(this).setMessage("Select game mode").setCancelable(true)
                 .setPositiveButton("Classic", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
-                        startActivity(classic);
+                        startActivity(Mastermind.class);
                     } // onClick(DialogInterface, int)
                 }).setNegativeButton("Timed", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
-                        startActivity(timed);
+                        startActivity(TimedMastermind.class);
                     } // onClick(DialogInterface, int)
-                });
-        final AlertDialog alert = builder.create();
-        alert.show();
+                }).create().show();
     } // newGameDialog()
-
-    public void onScoresClick(final View view) {
-        startActivity(new Intent(this, HighScoreActivity.class));
-    } // onScoresClick(View)
 
     public void onNewGameClick(final View view) {
         newGameDialog();
     } // onNewGameClick(View)
 
+    private void startActivity(final Class<? extends Activity> clazz) {
+        startActivity(new Intent(this, clazz));
+    } // startActivity(Class)
+
     public void onInstructionsClick(final View view) {
-        startActivity(new Intent(this, Instructions.class));
+        startActivity(Instructions.class);
     } // onInstructionsClick(View)
+
+    public void onHighScoresClick(final View view) {
+        startActivity(HighScoreActivity.class);
+    } // onHighScoresClick(View)
 
     public void onProClick(final View view) {
         final Intent browserIntent = new Intent(Intent.ACTION_VIEW);
@@ -75,8 +73,4 @@ public class MainMenu extends Activity {
             } // catch
         } // catch
     } // onProClick(View)
-
-    public void onQuitClick(final View view) {
-        finish();
-    } // onQuitClick(View)
-} // MainMenu
+} // class MainMenu
