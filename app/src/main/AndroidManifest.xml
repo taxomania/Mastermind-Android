@@ -25,7 +25,7 @@
             android:name="TimedMastermind"
             android:screenOrientation="sensorPortrait" />
         <activity
-            android:name="HighScoreActivity"
+            android:name="HighScoresActivity"
             android:label="@string/title_high_scores"
             android:screenOrientation="sensorPortrait" />
         <activity

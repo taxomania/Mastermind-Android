@@ -47,7 +47,7 @@ public final class MainMenu extends ActionBarActivity {
     } // onInstructionsClick(View)
 
     public void onHighScoresClick(final View view) {
-        startActivity(HighScoreActivity.class);
+        startActivity(HighScoresActivity.class);
     } // onHighScoresClick(View)
 
     public void onProClick(final View view) {

@@ -59,7 +59,7 @@ public final class RatePrompt {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View v = inflater.inflate(R.layout.rate_prompt_dialog, null);
 
-        ((Button) v.findViewById(R.id.rateOk)).setOnClickListener(new OnClickListener() {
+        v.findViewById(R.id.rateOk).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
                 final Intent browserIntent = new Intent(Intent.ACTION_VIEW);
@@ -79,14 +79,14 @@ public final class RatePrompt {
             } // onClick(View)
         });
 
-        ((Button) v.findViewById(R.id.rateLater)).setOnClickListener(new OnClickListener() {
+        v.findViewById(R.id.rateLater).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
                 cancel();
             } // onClick(View)
         });
 
-        ((Button) v.findViewById(R.id.rateNever)).setOnClickListener(new OnClickListener() {
+        v.findViewById(R.id.rateNever).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
                 sDoesPrompt = false;

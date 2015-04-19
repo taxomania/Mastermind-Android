@@ -57,25 +57,26 @@ final class DataHelper {
         mDb.delete(Scores.TABLE_NAME, null, null);
     } // deleteAll()
 
-    List<Map<String, Object>> selectAll() {
-        final List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+    List<HighScore> selectAllScores() {
+        final List<HighScore> list = new ArrayList<>();
         final Cursor cursor = mDb.query(Scores.TABLE_NAME, new String[] { Scores.NAME, Scores.TIME,
                 Scores.GUESSES }, null, null, null, null, Scores.TIME + " asc, " + Scores.GUESSES
                 + " asc");
         if (cursor.moveToFirst()) {
             do {
-                final Map<String, Object> map = new HashMap<String, Object>();
-                map.put(cursor.getColumnName(0), cursor.getString(0));
-                map.put(cursor.getColumnName(1), cursor.getInt(1));
-                map.put(cursor.getColumnName(2), cursor.getInt(2));
-                list.add(map);
+                final HighScore score = new HighScore();
+                score.name = cursor.getString(0);
+                score.time = cursor.getInt(1);
+                score.attempts = cursor.getInt(2);
+                list.add(score);
             } while (cursor.moveToNext());
         } // if
         if (cursor != null && !cursor.isClosed()) {
             cursor.close();
         } // if
         return list;
-    } // selectAll(List<Map<String, Object>>)
+    } // selectAllScores(List<HighScore>)
+
 
     List<Integer> selectAllTimes() {
         final List<Integer> list = new ArrayList<Integer>();
