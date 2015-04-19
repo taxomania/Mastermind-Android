@@ -14,14 +14,14 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:onClick="onNewGameClick"
-        android:text="New Game" />
+        android:text="@string/new_game" />
 
     <Button
         android:id="@+id/newTimedGame"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:onClick="onNewTimedGameClick"
-        android:text="New Timed Game" />
+        android:text="@string/new_game_timed" />
 
     <Button
         android:id="@+id/instructions"
@@ -42,6 +42,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:onClick="onProClick"
-        android:text="Mastermind Pro" />
+        android:text="@string/pro" />
 
 </LinearLayout>

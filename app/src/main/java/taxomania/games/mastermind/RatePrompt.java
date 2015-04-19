@@ -43,7 +43,7 @@ public final class RatePrompt {
 
     private static void prompt(final Context context) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Rate Mastermind").setView(getDialogLayout(context)).setCancelable(true)
+        builder.setTitle(context.getString(R.string.rate_mastermind)).setView(getDialogLayout(context)).setCancelable(true)
                 .setOnCancelListener(new OnCancelListener() {
                     @Override
                     public void onCancel(final DialogInterface dialog) {

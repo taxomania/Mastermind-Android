@@ -11,26 +11,26 @@
         android:layout_width="0dp"
         android:gravity="center"
         android:layout_height="match_parent"
-        tools:text="#"/>
+        tools:text="@string/rank"/>
     <TextView
         android:id="@+id/name"
         android:layout_weight="2"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:gravity="center_vertical|left"
-        tools:text="Name"/>
+        tools:text="@string/name"/>
     <TextView
         android:id="@+id/time"
         android:gravity="center"
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        tools:text="Time"/>
+        tools:text="@string/time"/>
     <TextView
         android:id="@+id/attempts"
         android:gravity="center"
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        tools:text="Attempts"/>
+        tools:text="@string/guesses"/>
 </LinearLayout>
