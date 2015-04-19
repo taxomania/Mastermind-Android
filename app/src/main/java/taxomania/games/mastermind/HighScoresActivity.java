@@ -127,25 +127,13 @@ public class HighScoresActivity extends ActionBarActivity {
                 super(itemView);
             }
 
-            private static String getTimeString(final int time) {
-                final int minutes = time / 60;
-                final int seconds = time % 60;
-                final String secs = (seconds < 10) ? ("0" + seconds) : Integer.toString(seconds);
-                final String mins = (minutes < 10) ? ("0" + minutes) : Integer.toString(minutes);
-                return mins + ":" + secs;
-            } // getTimeString(int)
-
-
             void setHighScore(HighScore score){
                 ((TextView)itemView.findViewById(R.id.rank)).setText(""+score.rank);
                 ((TextView)itemView.findViewById(R.id.name)).setText(score.name);
                 ((TextView)itemView.findViewById(R.id.time)).setText(score.getTime());
                 ((TextView)itemView.findViewById(R.id.attempts)).setText(""+score.attempts);
             }
-
         }
-
-
     }
 
 }
