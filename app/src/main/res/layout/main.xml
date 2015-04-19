@@ -1,41 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mainLayout"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/menu"
-    android:padding="4dp" >
-
-    <Button
-        android:id="@+id/pro"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:onClick="onProClick"
-        android:text="Mastermind Pro" />
-
-    <Button
-        android:id="@+id/highscore"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/pro"
-        android:onClick="onHighScoresClick"
-        android:text="High Scores" />
-
-    <Button
-        android:id="@+id/instructions"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/highscore"
-        android:onClick="onInstructionsClick"
-        android:text="Instructions" />
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/blue"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="32dp">
 
     <Button
         android:id="@+id/newGame"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/instructions"
         android:onClick="onNewGameClick"
         android:text="New Game" />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/newTimedGame"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onNewTimedGameClick"
+        android:text="New Timed Game" />
+
+    <Button
+        android:id="@+id/instructions"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onInstructionsClick"
+        android:text="@string/title_instructions" />
+
+    <Button
+        android:id="@+id/highscore"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onHighScoresClick"
+        android:text="@string/title_high_scores" />
+
+    <Button
+        android:id="@+id/pro"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onProClick"
+        android:text="Mastermind Pro" />
+
+</LinearLayout>

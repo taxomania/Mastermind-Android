@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mastermindLayout"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/blue" >
 
     <Chronometer
@@ -12,27 +12,30 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:padding="5dp"
+        android:paddingLeft="16dp"
+        android:textColor="@android:color/white"
         android:text=""
         android:visibility="invisible" />
 
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_above="@+id/selection"
         android:layout_below="@id/timer"
         android:paddingLeft="20dp"
         android:paddingTop="5dp" >
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
             <!-- guess 10 -->
 
             <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" >
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
 
                 <taxomania.games.mastermind.SmallPegSlot
                     android:id="@+id/smallPeg1"
@@ -97,8 +100,8 @@
             <!-- guess 9 -->
 
             <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" >
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
 
                 <taxomania.games.mastermind.SmallPegSlot
                     android:id="@+id/smallPeg5"
@@ -163,8 +166,8 @@
             <!-- guess 8 -->
 
             <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" >
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
 
                 <taxomania.games.mastermind.SmallPegSlot
                     android:id="@+id/smallPeg9"
@@ -229,8 +232,8 @@
             <!-- guess 7 -->
 
             <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" >
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
 
                 <taxomania.games.mastermind.SmallPegSlot
                     android:id="@+id/smallPeg13"
@@ -295,8 +298,8 @@
             <!-- guess 6 -->
 
             <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" >
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
 
                 <taxomania.games.mastermind.SmallPegSlot
                     android:id="@+id/smallPeg17"
@@ -361,8 +364,8 @@
             <!-- guess 5 -->
 
             <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" >
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
 
                 <taxomania.games.mastermind.SmallPegSlot
                     android:id="@+id/smallPeg21"
@@ -427,8 +430,8 @@
             <!-- guess 4 -->
 
             <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" >
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
 
                 <taxomania.games.mastermind.SmallPegSlot
                     android:id="@+id/smallPeg25"
@@ -493,8 +496,8 @@
             <!-- guess 3 -->
 
             <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" >
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
 
                 <taxomania.games.mastermind.SmallPegSlot
                     android:id="@+id/smallPeg29"
@@ -559,8 +562,8 @@
             <!-- guess 2 -->
 
             <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" >
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
 
                 <taxomania.games.mastermind.SmallPegSlot
                     android:id="@+id/smallPeg33"
@@ -625,8 +628,8 @@
             <!-- guess 1 -->
 
             <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" >
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
 
                 <taxomania.games.mastermind.SmallPegSlot
                     android:id="@+id/smallPeg37"
@@ -694,8 +697,9 @@
     <!-- selection of pegs -->
 
     <LinearLayout
-        android:id="@id/selection"
-        android:layout_width="fill_parent"
+        android:id="@+id/selection"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal" >

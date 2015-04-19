@@ -30,21 +30,12 @@ public final class MainMenu extends ActionBarActivity {
         RatePrompt.appLaunched(this);
     } // onCreate(Bundle)
 
-    private void newGameDialog() {
-        new AlertDialog.Builder(this).setMessage("Select game mode").setCancelable(true)
-                .setPositiveButton("Classic", new DialogInterface.OnClickListener() {
-                    public void onClick(final DialogInterface dialog, final int id) {
-                        startActivity(Mastermind.class);
-                    } // onClick(DialogInterface, int)
-                }).setNegativeButton("Timed", new DialogInterface.OnClickListener() {
-                    public void onClick(final DialogInterface dialog, final int id) {
-                        startActivity(TimedMastermind.class);
-                    } // onClick(DialogInterface, int)
-                }).create().show();
-    } // newGameDialog()
+    public void onNewTimedGameClick(final View view) {
+        startActivity(TimedMastermind.class);
+    } // onNewGameClick(View)
 
     public void onNewGameClick(final View view) {
-        newGameDialog();
+        startActivity(Mastermind.class);
     } // onNewGameClick(View)
 
     private void startActivity(final Class<? extends Activity> clazz) {
