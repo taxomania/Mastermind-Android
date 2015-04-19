@@ -20,9 +20,11 @@
         </activity>
         <activity
             android:name="Mastermind"
+            android:label="@string/title_classic"
             android:screenOrientation="sensorPortrait" />
         <activity
             android:name="TimedMastermind"
+            android:label="@string/title_timed"
             android:screenOrientation="sensorPortrait" />
         <activity
             android:name="HighScoresActivity"

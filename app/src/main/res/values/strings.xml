@@ -2,6 +2,8 @@
 <resources>
     <string name="app_name">Mastermind</string>
 
+    <string name="title_classic">Classic</string>
+    <string name="title_timed">Timed</string>
     <string name="title_instructions">Instructions</string>
     <string name="title_high_scores">High Scores</string>
 

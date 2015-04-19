@@ -250,13 +250,6 @@ public final class TimedMastermind extends Mastermind {
     public boolean onOptionsItemSelected(final MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case MENU_NEW_GAME:
-                startActivity(new Intent(this, getClass()));
-                finish();
-                return true;
-            case MENU_INSTRUCTIONS:
-                startActivity(new Intent(this, Instructions.class));
-                return true;
             case MENU_PAUSE:
                 pauseGame();
                 return true;

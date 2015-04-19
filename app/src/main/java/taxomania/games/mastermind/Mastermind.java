@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +21,7 @@ import android.widget.ImageView;
  * @author Tariq Patel
  * 
  */
-public class Mastermind extends Activity {
+public class Mastermind extends ActionBarActivity {
     // Constant declarations
     static final int BLUE = 0, GREEN = 1, RED = 2, WHITE = 3, YELLOW = 4, PURPLE = 5,
             TOTAL_PEG_SLOTS = 40, MAX_PEGS = 4, MAX_GUESSES = 10;
