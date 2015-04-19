@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="taxomania.games.mastermind"
-    android:versionCode="12"
-    android:versionName="3.4">
+    package="taxomania.games.mastermind">
 
     <application
         android:icon="@drawable/icon"
