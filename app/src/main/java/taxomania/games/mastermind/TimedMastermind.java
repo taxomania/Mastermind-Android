@@ -57,7 +57,6 @@ public final class TimedMastermind extends Mastermind {
                         : ((Integer) (int) mMinutes).toString();
                 final String currentTime = mins + ":" + secs;
                 chrono.setText(currentTime);
-                chrono.setPadding(10, 10, 10, 10);
             } // onChronometerTick(Chronometer)
         });
 

@@ -2,26 +2,36 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="taxomania.games.mastermind"
     android:versionCode="12"
-    android:versionName="3.4" >
+    android:versionName="3.4">
 
     <application
         android:icon="@drawable/icon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name="MainMenu"
-            android:screenOrientation="sensorPortrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:screenOrientation="sensorPortrait" android:name="Mastermind" />
-        <activity android:name="TimedMastermind" android:screenOrientation="sensorPortrait"/>
-        <activity android:name="HighScoreActivity" android:screenOrientation="sensorPortrait"/>
-        <activity android:name="Instructions" android:screenOrientation="sensorPortrait"/>
+        <activity
+            android:name="Mastermind"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name="TimedMastermind"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name="HighScoreActivity"
+            android:label="@string/title_high_scores"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name="Instructions"
+            android:label="@string/title_instructions"
+            android:screenOrientation="sensorPortrait" />
     </application>
 
 </manifest>

@@ -27,7 +27,6 @@ public final class MainMenu extends ActionBarActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         RatePrompt.appLaunched(this);
     } // onCreate(Bundle)
 

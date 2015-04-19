@@ -8,6 +8,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +16,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-public final class HighScoreActivity extends Activity {
+public final class HighScoreActivity extends ActionBarActivity {
     private TableLayout mHighScoreTable;
 
     @Override
@@ -23,8 +24,6 @@ public final class HighScoreActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.high_score_layout);
         mHighScoreTable = (TableLayout) findViewById(R.id.highScoreTable);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
         new PrintHighScores().execute(false);
     } // onCreate(Bundle)
 
@@ -34,23 +33,19 @@ public final class HighScoreActivity extends Activity {
 
         final TextView rankText = new TextView(this);
         rankText.setText("Rank");
-        rankText.setTextColor(Color.WHITE);
         rankText.setGravity(Gravity.CENTER);
         tr.addView(rankText);
 
         final TextView nameText = new TextView(this);
         nameText.setText("Name");
-        nameText.setTextColor(Color.WHITE);
         tr.addView(nameText);
 
         final TextView scoreText = new TextView(this);
         scoreText.setText("Time");
-        scoreText.setTextColor(Color.WHITE);
         tr.addView(scoreText);
 
         final TextView gText = new TextView(this);
         gText.setText("Attempts");
-        gText.setTextColor(Color.WHITE);
         gText.setGravity(Gravity.CENTER);
         tr.addView(gText);
     } // addHeaders()
@@ -63,25 +58,21 @@ public final class HighScoreActivity extends Activity {
 
             final TextView rankText = new TextView(this);
             rankText.setText(((Integer) i).toString());
-            rankText.setTextColor(Color.WHITE);
             rankText.setGravity(Gravity.CENTER);
             tr.addView(rankText);
             i++;
 
             final TextView nameText = new TextView(this);
             nameText.setText(score.get(DataHelper.Scores.NAME).toString());
-            nameText.setTextColor(Color.WHITE);
             tr.addView(nameText);
 
             final TextView scoreText = new TextView(this);
             scoreText.setText(getTimeString((Integer) score.get(DataHelper.Scores.TIME)));
-            scoreText.setTextColor(Color.WHITE);
             tr.addView(scoreText);
 
             final TextView gText = new TextView(this);
             gText.setText(score.get(DataHelper.Scores.GUESSES).toString());
             gText.setGravity(Gravity.CENTER);
-            gText.setTextColor(Color.WHITE);
             tr.addView(gText);
         } // for each score
     } // printScores(List<Map<String,Object>>)

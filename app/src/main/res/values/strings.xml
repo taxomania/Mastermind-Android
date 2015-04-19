@@ -2,6 +2,9 @@
 <resources>
     <string name="app_name">Mastermind</string>
 
+    <string name="title_instructions">Instructions</string>
+    <string name="title_high_scores">High Scores</string>
+
     <string name="rate">If you enjoy playing Mastermind, would you mind taking the time to rate it? Thanks for your support!</string>
 
     <string name="instructions">Aim:\nCrack the code\n\nInstructions:\nClick on a peg to select it.\n\nSelected pegs are highlighted.\n\nSelect a slot in the row pointed to by the arrow to place the peg in it.\n\nWhen all 4 slots are filled, click on the tick to confirm your guess.\n\nThe small red peg means one of the four pegs is the correct colour and in the correct position.\n\nThe small white peg means one of the four pegs is the correct colour but is in the wrong position.</string>
