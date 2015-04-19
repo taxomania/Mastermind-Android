@@ -3,7 +3,7 @@
     android:id="@+id/mastermindLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/bg" >
+    android:background="@color/dark_blue" >
 
     <Chronometer
         android:id="@+id/timer"

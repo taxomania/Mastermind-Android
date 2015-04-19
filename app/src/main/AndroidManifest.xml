@@ -4,15 +4,13 @@
     android:versionCode="12"
     android:versionName="3.4" >
 
-    <!-- need to set target api=> need action bar for menu -->
-    <uses-sdk android:minSdkVersion="4" />
-
     <application
         android:icon="@drawable/icon"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.NoTitleBar" >
+        android:theme="@style/AppTheme" >
         <activity
             android:name="MainMenu"
+            android:screenOrientation="sensorPortrait"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,10 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="Mastermind" />
-        <activity android:name="TimedMastermind" />
-        <activity android:name="HighScoreActivity" />
-        <activity android:name="Instructions" />
+        <activity android:screenOrientation="sensorPortrait" android:name="Mastermind" />
+        <activity android:name="TimedMastermind" android:screenOrientation="sensorPortrait"/>
+        <activity android:name="HighScoreActivity" android:screenOrientation="sensorPortrait"/>
+        <activity android:name="Instructions" android:screenOrientation="sensorPortrait"/>
     </application>
 
 </manifest>

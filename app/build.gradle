@@ -1,14 +1,20 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 4
+    compileSdkVersion 22
     buildToolsVersion "22.0.1"
 
     defaultConfig {
         applicationId "taxomania.games.mastermind"
-        minSdkVersion 4
-        targetSdkVersion 4
+        minSdkVersion 14
+        targetSdkVersion 22
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
 
     buildTypes {
         release {
@@ -16,4 +22,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+}
+
+dependencies {
+    compile('com.android.support:appcompat-v7:22.0.0') { force = true }
 }

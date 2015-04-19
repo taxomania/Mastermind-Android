@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/bg"
+    android:background="@color/dark_blue"
     android:orientation="vertical" >
 
     <TextView
@@ -11,7 +11,7 @@
         android:layout_gravity="center"
         android:padding="14dp"
         android:text="High Scores"
-        android:textColor="@color/white"
+        android:textColor="@android:color/white"
         android:textSize="18dp"
         android:textStyle="bold" />
 

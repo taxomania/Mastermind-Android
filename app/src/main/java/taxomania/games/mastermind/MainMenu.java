@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 
@@ -17,7 +18,7 @@ import android.view.View;
  * 
  */
 
-public final class MainMenu extends Activity {
+public final class MainMenu extends ActionBarActivity {
     private static final String TAG = MainMenu.class.getSimpleName();
     private static final String MARKET_URI = "market://details?id=taxomania.games.mastermindpro";
     private static final String WEB_URI = "https://market.android.com/details?id=taxomania.games.mastermindpro";
